@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Selenium eti gem'
   spec.description   = 'Cross-project eti and mini-eti autotests'
-  spec.homepage      = 'https://github.com/abak-press/abak-selenium_eti'
+  spec.homepage      = 'https://github.com/abak-press/apress-selenium_eti'
 
   spec.files       	 = `git ls-files -z`.split("\x0")
   spec.require_paths = ['lib']
