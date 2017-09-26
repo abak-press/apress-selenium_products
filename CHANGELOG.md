@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-09-26 [7dc00d7](../../commit/7dc00d7) - __(rezerbit)__ fix(gemspec): change homepage
+
+#### v0.1.1
+ * 2017-09-26 [88923a8](../../commit/88923a8) - __(rezerbit)__ Release 0.1.1
  * 2017-09-26 [d0a7817](../../commit/d0a7817) - __(rezerbit)__ fix(gemspec): change homepage
 
 #### v0.1.0
