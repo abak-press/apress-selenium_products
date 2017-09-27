@@ -1,6 +1,6 @@
 # TODO: удалить неиспользуемые локаторы
 module CompanySite
-  class MiniEtiPage < Page
+  class EtiPage < Page
     checkbox(:product_checkbox, css: '.js-check-product')
     checkbox(:deal_checkbox, css: '.js-input-deals')
     button(:save_deals, css: 'div.ui-dialog div > button:nth-child(1)')
