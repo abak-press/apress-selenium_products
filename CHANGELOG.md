@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-09-27 [2dea8bb](../../commit/2dea8bb) - __(Ilya Zhidkov)__ refactor: delete "mini" from page name
+
+#### v0.1.2
+ * 2017-09-26 [83dff1b](../../commit/83dff1b) - __(rezerbit)__ Release 0.1.2
  * 2017-09-26 [7dc00d7](../../commit/7dc00d7) - __(rezerbit)__ fix(gemspec): change homepage
 
 #### v0.1.1
