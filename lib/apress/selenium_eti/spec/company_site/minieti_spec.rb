@@ -20,7 +20,7 @@ describe 'Мини-ЕТИ' do
       end
 
       it 'введенное имя отображается' do
-        expect(cs_eti_page.product_name).to include @name
+        expect(cs_eti_page.product_name?(@name)).to be true
       end
 
       context 'когда добавляем картинку' do
@@ -101,10 +101,10 @@ describe 'Мини-ЕТИ' do
     end
 
     context 'когда заполняем рубрику' do
-      before(:all) { cs_eti_page.set_rubric(CONFIG['mini_eti']['rubric']) }
+      before(:all) { cs_eti_page.set_rubric(CONFIG['eti']['rubric']) }
 
       it 'привязывается рубрика' do
-        expect(cs_eti_page.rubric_cell).to include CONFIG['mini_eti']['rubric']
+        expect(cs_eti_page.rubric_cell).to include CONFIG['eti']['rubric']
       end
 
       context 'когда отменяем действие' do
@@ -118,7 +118,7 @@ describe 'Мини-ЕТИ' do
           before(:all) { cs_eti_page.operation_redo }
 
           it 'привязывается рубрика' do
-            expect(cs_eti_page.rubric_cell).to include CONFIG['mini_eti']['rubric']
+            expect(cs_eti_page.rubric_cell).to include CONFIG['eti']['rubric']
           end
         end
       end
@@ -156,7 +156,7 @@ describe 'Мини-ЕТИ' do
     end
 
     it 'товар удаляется' do
-      expect(cs_eti_page.product_name).not_to eq @name
+      expect(cs_eti_page.product_name?(@name)).to be false
     end
   end
 
