@@ -57,13 +57,15 @@ module CompanySite
 
     button(:operation_undo, css: 'div.operation.undo')
     button(:operation_redo, css: 'div.operation.redo')
+    button(:publish_product, css: '.dialog-status .published')
+    button(:archive_product, css: '.dialog-status .archived')
 
     select_list(:choose_amount_of_products_on_page, css: '.ptrfap-choose-amount')
     divs(:product, css: 'tr.pt-tr')
-    div(:save_status, css: ".js-status-bar-content")
+    div(:save_status, css: '.js-status-bar-content')
     text_area(:product_search, xpath: "//*[@id='product-bindings-search']")
     button(:search_button, css: '.js-search-submit')
-    span(:first_product_status, css: ".js-eti-status > div > i")
+    span(:first_product_status, css: '.js-eti-status > div > i')
 
     alias old_confirm confirm
     def save
@@ -71,89 +73,105 @@ module CompanySite
       confirm_not_exists?(30)
     end
 
-    def delete
-      Page.button(:delete_product_button, css: '.js-delete-product')
-      confirm(true) { delete_product_button }
-    end
-
-    def set_rubric(text)
-      browser
-        .action
-        .move_to(rubric_cell_element.element)
-        .click
-        .perform
-
-      self.rubric_search = text
-      rubric_search_submit
-      first_rubric_search_result
-    end
-
-    def load_image(path)
+    def wait_saving(delay = 0.1)
+      # Задержка, так как иначе в wait_until идет предыдущий статус изменений
+      sleep delay
       wait_until { save_status == 'Все изменения сохранены' }
-
-      browser
-        .action
-        .move_to(image_cell_element.element)
-        .click
-        .perform
-
-      upload_file(upload_image_element, path)
-      wait_until { image_loaded? }
     end
+
+    module Fields
+      def create_and_set_product_fields(options = {})
+        add_product
+        options.each do |field_key, field_value|
+          send("set_#{field_key}", field_value)
+        end
+      end
+
+      def set_name(text)
+        browser
+          .action
+          .move_to(name_cell_element.element)
+          .click
+          .send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
+          .send_keys(text)
+          .send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
+          .perform
+
+        wait_saving
+      end
+
+      def set_price_from_to(options = {})
+        browser
+          .action
+          .move_to(price_cell_element.element)
+          .click
+          .perform
+
+        select_from_to
+        self.price_from = options.fetch(:from, '')
+        self.price_to = options.fetch(:to, '')
+
+        save_price
+        wait_saving
+      end
+
+      def set_discount_price(options = {})
+        browser
+          .action
+          .move_to(price_cell_element.element)
+          .click
+          .perform
+
+        select_discount
+
+        self.previous_price = options.fetch(:previous, '')
+        self.discount_price = options.fetch(:discount, '')
+        discount_expires_at_date_element.element.send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
+
+        save_price
+        wait_saving
+      end
+
+      def set_price(text)
+        browser
+          .action
+          .move_to(price_cell_element.element)
+          .click
+          .send_keys(price_text_area_element.element, text)
+          .perform
+
+        try_to(:save_price)
+        wait_saving
+      end
+
+      def set_rubric(text)
+        browser
+          .action
+          .move_to(rubric_cell_element.element)
+          .click
+          .perform
+
+        self.rubric_search = text
+        rubric_search_submit
+        wait_until { first_rubric_search_result? }
+        first_rubric_search_result
+
+        wait_saving
+      end
+
+      def set_image(path)
+        image_cell
+        upload_file(upload_image_element, path)
+        wait_until { image_loaded? }
+        # TODO
+        # добавить закрытие попапа (close_image_uploader) и изменить кейс в mini_eti_spec
+      end
+    end
+
+    include Fields
 
     def thermometer_value
       thermometer.tr('%', '').to_i
-    end
-
-    def name=(text)
-      browser
-        .action
-        .move_to(name_cell_element.element)
-        .click
-        .send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
-        .send_keys(text)
-        .send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
-        .perform
-    end
-
-    def set_price_from_to(from, to)
-      browser
-        .action
-        .move_to(price_cell_element.element)
-        .click
-        .perform
-
-      select_from_to
-      self.price_from = from
-      self.price_to = to
-      save_price
-    end
-
-    def set_discount_price(previous_price, discount_price)
-      browser
-        .action
-        .move_to(price_cell_element.element)
-        .click
-        .perform
-
-      select_discount
-
-      self.previous_price = previous_price
-      self.discount_price = discount_price
-      discount_expires_at_date_element.element.send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
-
-      save_price
-    end
-
-    def price=(text)
-      browser
-        .action
-        .move_to(price_cell_element.element)
-        .click
-        .send_keys(price_text_area_element.element, text)
-        .perform
-
-      try_to(:save_price)
     end
 
     def price
@@ -167,7 +185,7 @@ module CompanySite
         .click
         .perform
 
-      wait_until { save_status == 'Все изменения сохранены' }
+      wait_saving
 
       exists_true if is_exist
     end
@@ -193,6 +211,16 @@ module CompanySite
       unpublish_status_icon?
     end
 
+    def product_archived?(name)
+      Page.span(:archived_status_icon, xpath: "//td[@data-text='#{name}']/..//i[contains(@class, 'archived')]")
+      archived_status_icon?
+    end
+
+    def product_declined?(name)
+      Page.span(:declined_status_icon, xpath: "//td[@data-text='#{name}']/..//i[contains(@class, 'declined')]")
+      declined_status_icon?
+    end
+
     def search_product(name)
       self.product_search = name
       search_button
@@ -204,8 +232,23 @@ module CompanySite
           "//td[@data-text='#{name}']/..//i[contains(@class, 'js-delete-product')]")
 
       confirm(true) { delete_product_icon }
-      sleep 0.2
-      wait_until { save_status == 'Все изменения сохранены' }
+      wait_saving
+    end
+
+    def change_status_to_published(name)
+      Page.button(:product_status, xpath: "//*[@data-text='#{name}']/..//*[contains(@class, 'js-change-status')]")
+      product_status
+      publish_product
+
+      wait_saving
+    end
+
+    def change_status_to_archived(name)
+      Page.button(:product_status, xpath: "//*[@data-text='#{name}']/..//*[contains(@class, 'js-change-status')]")
+      product_status
+      archive_product
+
+      wait_saving
     end
 
     ActiveSupport.run_load_hooks(:'apress/selenium_eti/company_site/eti_page', self)

@@ -15,7 +15,7 @@ describe 'ЕТИ' do
       before(:all) do
         @name = Faker::Number.number(5)
         cs_eti_page.add_product
-        cs_eti_page.name = @name
+        cs_eti_page.set_name(@name)
         cs_eti_page.wait_until { cs_eti_page.save_status == 'Все изменения сохранены' }
         cs_eti_page.refresh
         cs_eti_page.wait_until { cs_eti_page.save_status == 'Все изменения сохранены' }
@@ -38,7 +38,7 @@ describe 'ЕТИ' do
         @name = Faker::Number.number(5)
         cs_eti_page.add_product
         cs_eti_page.set_rubric(CONFIG['eti']['rubric'])
-        cs_eti_page.name = @name
+        cs_eti_page.set_name(@name)
         cs_eti_page.wait_until { cs_eti_page.first_product_status_element.attribute('title') == 'Опубликованные' }
         cs_eti_page.refresh
         cs_eti_page.wait_until { cs_eti_page.save_status == 'Все изменения сохранены' }
