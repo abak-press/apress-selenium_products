@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-10-03 [13d992d](../../commit/13d992d) - __(ovsyanik-ka)__ feature(eti): creation product
+
+#### v0.1.3
+ * 2017-09-29 [f1a3118](../../commit/f1a3118) - __(rezerbit)__ Release 0.1.3
  * 2017-09-27 [2dea8bb](../../commit/2dea8bb) - __(Ilya Zhidkov)__ refactor: delete "mini" from page name
 
 #### v0.1.2
