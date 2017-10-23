@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Мини-ЕТИ' do
   cs_eti_page = CompanySite::EtiPage.new
   cs_main_page = CompanySite::MainPage.new
+  cs_mini_eti_page = CompanySite::MiniEtiPage.new
 
   before(:all) do
     log_in_as(:user)
@@ -16,7 +17,7 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем имя' do
       before(:all) do
         @name = Faker::Number.number(5)
-        cs_eti_page.name = @name
+        cs_eti_page.set_name(@name)
       end
 
       it 'введенное имя отображается' do
@@ -26,7 +27,7 @@ describe 'Мини-ЕТИ' do
       context 'когда добавляем картинку' do
         before(:all) do
           @thermometer_value = cs_eti_page.thermometer_value
-          cs_eti_page.load_image(IMAGE_PATH)
+          cs_eti_page.set_image(IMAGE_PATH)
         end
 
         it 'картинка появляется' do
@@ -34,13 +35,11 @@ describe 'Мини-ЕТИ' do
         end
 
         it 'увеличивается градус на термометре' do
-          cs_eti_page.wait_until { cs_eti_page.save_status == 'Все изменения сохранены' }
+          cs_eti_page.wait_saving
           expect(cs_eti_page.thermometer_value).to be @thermometer_value + CONFIG['battery_percents']['image']
         end
 
-        after(:all) do
-          cs_eti_page.close_image_uploader
-        end
+        after(:all) { cs_eti_page.close_image_uploader }
       end
     end
 
@@ -48,7 +47,8 @@ describe 'Мини-ЕТИ' do
       before(:all) do
         @thermometer_value = cs_eti_page.thermometer_value
         @price = Faker::Number.number(3)
-        cs_eti_page.price = @price
+
+        cs_eti_page.set_price(@price)
       end
 
       it 'введенная цена отображается' do
@@ -56,7 +56,6 @@ describe 'Мини-ЕТИ' do
       end
 
       it 'увеличивается градус на термометре' do
-        cs_eti_page.wait_until { cs_eti_page.save_status == 'Все изменения сохранены' }
         expect(cs_eti_page.thermometer_value.to_i).to be @thermometer_value + CONFIG['battery_percents']['price']
       end
     end
@@ -64,30 +63,31 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем цену от и до' do
       before(:all) do
         cs_eti_page.add_product
+
         @thermometer_value = cs_eti_page.thermometer_value
-        @price_from = Faker::Number.number(2)
-        @price_to = Faker::Number.number(3)
-        cs_eti_page.set_price_from_to(@price_from, @price_to)
+        @price_from_to = {from: Faker::Number.number(2), to: Faker::Number.number(3)}
+
+        cs_eti_page.set_price_from_to(@price_from_to)
       end
 
       it 'введенная цена отображается' do
-        expect(cs_eti_page.price_value).to include @price_from
-        expect(cs_eti_page.price_value).to include @price_to
+        expect(cs_eti_page.price_value).to include @price_from_to[:from], @price_from_to[:to]
       end
     end
 
     context 'когда заполняем цену со скидкой' do
       before(:all) do
         cs_eti_page.add_product
+
         @thermometer_value = cs_eti_page.thermometer_value
-        @price = Faker::Number.number(3)
-        @discount_price = Faker::Number.number(2)
-        cs_eti_page.set_discount_price(@price, @discount_price)
+        @discount_price = {previous: Faker::Number.number(3), discount: Faker::Number.number(2)}
+
+        cs_eti_page.set_discount_price(@discount_price)
       end
 
       it 'введенные цены и дата окончания скидки отображаются' do
-        expect(cs_eti_page.discount_price_value).to include @discount_price
-        expect(cs_eti_page.previous_price_value).to include @price
+        expect(cs_eti_page.discount_price_value).to include @discount_price[:discount]
+        expect(cs_eti_page.previous_price_value).to include @discount_price[:previous]
         expect(cs_eti_page.discount_expires_at_date_value).to include Time.now.strftime("%d.%m.%Y")
       end
     end
@@ -151,8 +151,8 @@ describe 'Мини-ЕТИ' do
     before do
       cs_eti_page.add_product
       @name = Faker::Number.number(5)
-      cs_eti_page.name = @name
-      cs_eti_page.delete
+      cs_eti_page.set_name(@name)
+      cs_mini_eti_page.delete_first_product
     end
 
     it 'товар удаляется' do
@@ -163,13 +163,13 @@ describe 'Мини-ЕТИ' do
   describe 'Копирование товара' do
     before do
       cs_eti_page.add_product
-
-      cs_eti_page.name = @name = Faker::Pokemon.name
-      cs_eti_page.price = @price = Faker::Number.number(5)
-      cs_eti_page.wait_until(45) { cs_eti_page.save_status == 'Все изменения сохранены' }
+      @name = Faker::Pokemon.name
+      cs_eti_page.set_name(@name)
+      cs_eti_page.set_price(@price = Faker::Number.number(5))
+      cs_eti_page.wait_saving
 
       cs_eti_page.copy_product
-      cs_eti_page.wait_until(45) { cs_eti_page.save_status == 'Все изменения сохранены' }
+      cs_eti_page.wait_saving
     end
 
     it 'товар копируется' do
@@ -180,7 +180,7 @@ describe 'Мини-ЕТИ' do
   context 'когда выбираем количество товаров на странице' do
     before do
       cs_eti_page.choose_amount_of_products_on_page = '50'
-      cs_eti_page.wait_until { cs_eti_page.save_status == 'Все изменения сохранены' }
+      cs_eti_page.wait_saving
     end
 
     it 'количество товаров на странице равно выбранному значению' do
