@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-10-11 [028c78f](../../commit/028c78f) - __(Ilya Zhidkov)__ feature(eti): product status tests https://jira.railsc.ru/browse/[BPC-11225](../../issues/PC-11225)
+
+#### v0.2.0
+ * 2017-10-17 [e169452](../../commit/e169452) - __(rezerbit)__ Release 0.2.0
  * 2017-10-03 [13d992d](../../commit/13d992d) - __(ovsyanik-ka)__ feature(eti): creation product
 
 #### v0.1.3
