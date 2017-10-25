@@ -93,7 +93,7 @@ describe 'Мини-ЕТИ' do
     end
 
     context 'когда заполняем наличие' do
-      before { cs_eti_page.exists = true }
+      before { cs_eti_page.set_exists(CONFIG['eti']['exists']['in stock']) }
 
       it 'введенная цена отображается' do
         expect(cs_eti_page.exists_value).to include 'в наличии'
@@ -168,7 +168,7 @@ describe 'Мини-ЕТИ' do
       cs_eti_page.set_price(@price = Faker::Number.number(5))
       cs_eti_page.wait_saving
 
-      cs_eti_page.copy_product
+      cs_mini_eti_page.copy_product
       cs_eti_page.wait_saving
     end
 

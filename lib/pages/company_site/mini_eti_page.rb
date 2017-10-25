@@ -1,5 +1,7 @@
 module CompanySite
   class MiniEtiPage < Page
+    button(:copy_product, css: '.js-copy-product')
+
     def delete_first_product
       Page.button(:delete_product_button, css: '.js-delete-product')
       confirm(true) { delete_product_button }
