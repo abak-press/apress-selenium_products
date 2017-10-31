@@ -59,5 +59,42 @@ describe 'ЕТИ' do
 
       after(:all) { cs_eti_page.delete_product(@name) }
     end
+
+    context 'когда копируем товар' do
+      before(:all) do
+        @product = {
+          name: Faker::Name.title,
+          rubric: CONFIG['eti']['rubric'],
+          portal_traits: {
+            gost: CONFIG['eti']['portal_traits']['gost'],
+            condition: CONFIG['eti']['portal_traits']['condition'],
+            manufacturer_country: CONFIG['eti']['portal_traits']['manufacturer_country']
+          },
+          exists: CONFIG['eti']['exists']['in stock'],
+          short_description: CONFIG['product_creation']['short_description']['valid'],
+          description: 'description',
+          price_from_to: {from: Faker::Number.number(3), to: Faker::Number.number(4)},
+          wholesale_price: {wholesale_price: Faker::Number.number(2), wholesale_number: Faker::Number.number(2)}
+        }
+
+        cs_eti_page.create_and_set_product_fields(@product)
+
+        cs_eti_page.search_product(@product[:name])
+        cs_eti_page.copy_product(@product[:name])
+
+        cs_eti_page.refresh
+        cs_eti_page.search_product(@product[:name])
+      end
+
+      # TODO: поправить удаление
+      # after(:all) { 2.times { cs_eti_page.delete_product(@product[:name])} }
+
+      it 'отобразится 2 идентичных товара' do
+        @first_product = cs_eti_page.product_rows_elements[0].text
+
+        expect(cs_eti_page.product_rows_elements.length).to eq 2
+        expect(cs_eti_page.product_rows_elements[1].text).to eq @first_product
+      end
+    end
   end
 end
