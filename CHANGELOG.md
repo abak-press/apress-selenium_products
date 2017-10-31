@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-10-25 [291d0be](../../commit/291d0be) - __(Ilya Zhidkov)__ feature(eti): product copying tests https://jira.railsc.ru/browse/[AT-33](../../issues/T-33)
+
+#### v0.3.0
+ * 2017-10-23 [2ea0203](../../commit/2ea0203) - __(rezerbit)__ Release 0.3.0
  * 2017-10-11 [028c78f](../../commit/028c78f) - __(Ilya Zhidkov)__ feature(eti): product status tests https://jira.railsc.ru/browse/[BPC-11225](../../issues/PC-11225)
 
 #### v0.2.0
