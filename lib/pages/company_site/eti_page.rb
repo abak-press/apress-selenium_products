@@ -66,6 +66,8 @@ module CompanySite
     text_area(:product_search, xpath: "//*[@id='product-bindings-search']")
     button(:search_button, css: '.js-search-submit')
     span(:first_product_status, css: '.js-eti-status > div > i')
+    button(:save_deals, xpath: "//*[@class='ui-button-text'][contains(text(), 'Сохранить')]")
+    checkbox(:deal_product_checkbox, xpath: "//*[text()[contains(., \'#{CONFIG['offer_with_product']}\')]]/input")
 
     alias old_confirm confirm
     def save
