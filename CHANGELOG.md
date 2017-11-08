@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-11-08 [7332a48](../../commit/7332a48) - __(rezerbit)__ feature: open new browser for every specs
+
+#### v0.4.0
+ * 2017-10-31 [6db8488](../../commit/6db8488) - __(rezerbit)__ Release 0.4.0
  * 2017-10-25 [291d0be](../../commit/291d0be) - __(Ilya Zhidkov)__ feature(eti): product copying tests https://jira.railsc.ru/browse/[AT-33](../../issues/T-33)
 
 #### v0.3.0
