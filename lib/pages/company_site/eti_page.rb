@@ -77,6 +77,8 @@ module CompanySite
     text_area(:product_search, xpath: "//*[@id='product-bindings-search']")
     button(:search_button, css: '.js-search-submit')
     span(:first_product_status, css: '.js-eti-status > div > i')
+    button(:save_deals, xpath: "//*[@class='ui-button-text'][contains(text(), 'Сохранить')]")
+    checkbox(:deal_product_checkbox, xpath: "//*[text()[contains(., \'#{CONFIG['offer_with_product']}\')]]/input")
 
     checkbox(:exact_search, css: '#exact_search')
     divs(:product_rows, css: '.js-pt-tr')
