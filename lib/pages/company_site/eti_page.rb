@@ -41,7 +41,7 @@ module CompanySite
     button(:close_image_uploader, css: '.ui-resizable .ui-dialog-titlebar-close')
 
     span(:image_uploader, css: '.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable')
-    button(:image_cell, css: '.fa-camera')
+    button(:image_cell, xpath: "//*[@class='ibb-no-photo']/i[@class='fa fa-camera blank-image']")
     button(:image_upload_btn, css: '.js-upload-input')
     span(:thermometer, css: '.js-battery-wrapper')
     span(:rubric_cell, css: '.js-rubric-preview-link')
