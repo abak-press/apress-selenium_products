@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-11-07 [1f4ffa0](../../commit/1f4ffa0) - __(ovsyanik)__ feature(eti): add lost locators
+
+#### v0.5.0
+ * 2017-11-08 [7b0ef5d](../../commit/7b0ef5d) - __(rezerbit)__ Release 0.5.0
  * 2017-11-08 [7332a48](../../commit/7332a48) - __(rezerbit)__ feature: open new browser for every specs
 
 #### v0.4.0
