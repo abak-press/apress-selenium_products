@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-11-09 [b0d1b72](../../commit/b0d1b72) - __(ovsyanik)__ fix(minieti): image locator
+
+#### v0.5.1
+ * 2017-11-09 [225de63](../../commit/225de63) - __(rezerbit)__ Release 0.5.1
  * 2017-11-07 [1f4ffa0](../../commit/1f4ffa0) - __(ovsyanik)__ feature(eti): add lost locators
 
 #### v0.5.0
