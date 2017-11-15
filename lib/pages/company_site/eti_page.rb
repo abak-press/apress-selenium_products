@@ -20,7 +20,6 @@ module CompanySite
     span(:price_cell, xpath: "//*[contains(text(), 'Указать розничную цену')]")
     span(:wholesale_price_cell, css: '.js-eti-wholesaleprice .bp-price-free')
     span(:exist_cell, xpath: "//*[contains(text(), 'Указать наличие')]")
-    span(:portal_traits_cell, css: '.js-eti-traits-edit')
     button(:add_product, css: '.new.js-add-product')
     text_area(:edit_text_area, css: '.edit-text')
 
@@ -35,9 +34,6 @@ module CompanySite
     text_area(:description, css: '.cke_textarea_inline')
     text_area(:wholesale_price, css: '.js-wholesale-price')
     text_area(:wholesale_number, css: '.js-wholesale-min-qty')
-    text_area(:gost, xpath: "//input[@data-name='ГОСТ']")
-    text_area(:condition, xpath: "//input[@data-name='Состояние']")
-    text_area(:manufacturer_country, xpath: "//input[@data-name='Страна-производитель']")
     button(:save_price, css: '.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only')
 
     span(:price_value, css: '.bp-price.fsn')
@@ -234,12 +230,15 @@ module CompanySite
         wait_saving
       end
 
-      def set_portal_traits(options = {})
-        Page.link(:gost_link, xpath: "//a[text()='#{options.fetch(:gost, '')}']")
-        Page.link(:condition_link, xpath: "//a[text()='#{options.fetch(:condition, '')}']")
-        Page.link(:manufacturer_country_link, xpath: "//a[text()='#{options.fetch(:manufacturer_country, '')}']")
+      def set_portal_traits(name, options = {})
+        Page.text_area(:trait_1, xpath: "//input[@data-name='#{CONFIG['eti']['portal_traits']['trait_1']}']")
+        Page.text_area(:trait_2, xpath: "//input[@data-name='#{CONFIG['eti']['portal_traits']['trait_2']}']")
+        Page.link(:trait_link1, xpath: "//a[text()='#{options.fetch(:trait_1, '')}']")
+        Page.link(:trait_link2, xpath: "//a[text()='#{options.fetch(:trait_2, '')}']")
+        Page.span(:portal_traits_cell, xpath:
+            "//td[@data-text='#{name}']/..//*[contains(text(), 'указать характеристики')]")
 
-        wait_until { portal_traits_cell_element.text.include?('указать характеристики') }
+        wait_until { portal_traits_cell? }
 
         browser
           .action
@@ -247,17 +246,13 @@ module CompanySite
           .click
           .perform
 
-        self.gost = options.fetch(:gost, '')
-        wait_until { gost_link? }
-        gost_link
+        self.trait_1 = options.fetch(:trait_1, '')
+        wait_until { trait_link1? }
+        trait_link1
 
-        self.condition = options.fetch(:condition, '')
-        wait_until { condition_link? }
-        condition_link
-
-        self.manufacturer_country = options.fetch(:manufacturer_country, '')
-        wait_until { manufacturer_country_link? }
-        manufacturer_country_link
+        self.trait_2 = options.fetch(:trait_2, '')
+        wait_until { trait_link2? }
+        trait_link2
 
         save_portal_traits
         wait_saving
