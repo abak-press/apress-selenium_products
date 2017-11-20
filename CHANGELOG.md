@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-11-20 [21cf365](../../commit/21cf365) - __(ovsyanik)__ feature(eti): add groups test
+
+#### v0.5.2
+ * 2017-11-09 [4b96e71](../../commit/4b96e71) - __(rezerbit)__ Release 0.5.2
  * 2017-11-09 [b0d1b72](../../commit/b0d1b72) - __(ovsyanik)__ fix(minieti): image locator
 
 #### v0.5.1
