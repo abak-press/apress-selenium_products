@@ -83,6 +83,8 @@ module CompanySite
     checkbox(:exact_search, css: '#exact_search')
     divs(:product_rows, css: '.js-pt-tr')
     span(:inframe_block, css: '.js-bcm-content')
+    span(:group_cell, css: '.js-group-preview-link')
+    button(:submit, xpath: "//*[@value='Выбрать']")
 
     alias old_confirm confirm
     def save
@@ -354,6 +356,13 @@ module CompanySite
       archive_product
 
       wait_saving
+    end
+
+    def set_group(name)
+      Page.button(:product_group, xpath: "//*[@id='popup-content']//*[contains(text(), '#{name}')]")
+      group_cell_element.click
+      product_group
+      submit
     end
 
     ActiveSupport.run_load_hooks(:'apress/selenium_eti/company_site/eti_page', self)
