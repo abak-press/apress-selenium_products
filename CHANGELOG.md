@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2017-11-15 [09e3e64](../../commit/09e3e64) - __(ovsyanik)__ fix(eti): delete product after copy
+
+#### v0.5.3
+ * 2017-11-20 [faa969d](../../commit/faa969d) - __(rezerbit)__ Release 0.5.3
  * 2017-11-20 [21cf365](../../commit/21cf365) - __(ovsyanik)__ feature(eti): add groups test
 
 #### v0.5.2
