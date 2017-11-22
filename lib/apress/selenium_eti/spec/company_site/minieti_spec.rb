@@ -7,7 +7,7 @@ describe 'Мини-ЕТИ' do
     @cs_mini_eti_page = CompanySite::MiniEtiPage.new
 
     log_in_as(:user)
-    navigate_to_company_catalog
+    navigate_to_minieti
     @cs_main_page.close_banner
   end
 
