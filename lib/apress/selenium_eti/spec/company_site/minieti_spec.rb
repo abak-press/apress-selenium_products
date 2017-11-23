@@ -24,7 +24,7 @@ describe 'Мини-ЕТИ' do
         expect(@cs_eti_page.product_name?(@name)).to be true
       end
 
-      context 'когда добавляем картинку' do
+      context 'когда добавляем картинку', skip: !RUN_CONFIG.fetch('local_running', false).to_b do
         before(:all) do
           @thermometer_value = @cs_eti_page.thermometer_value
           @cs_eti_page.set_image(IMAGE_PATH)
@@ -96,7 +96,7 @@ describe 'Мини-ЕТИ' do
       before { @cs_eti_page.set_exists(CONFIG['eti']['exists']['in stock']) }
 
       it 'введенная цена отображается' do
-        expect(@cs_eti_page.exists_value).to include 'в наличии'
+        expect(@cs_eti_page.exists_value).to include 'В наличии'
       end
     end
 
