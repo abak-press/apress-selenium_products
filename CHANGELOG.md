@@ -1,5 +1,10 @@
 
 #### [Current]
+ * 2017-11-23 [3c0a154](../../commit/3c0a154) - __(ovsyanik)__ fix: add skips for knife
+ * 2017-11-21 [f970a40](../../commit/f970a40) - __(ovsyanik)__ fix: add new companies fot eti, minieti & offers_product
+
+#### v0.5.4
+ * 2017-11-20 [2dbe51e](../../commit/2dbe51e) - __(rezerbit)__ Release 0.5.4
  * 2017-11-15 [09e3e64](../../commit/09e3e64) - __(ovsyanik)__ fix(eti): delete product after copy
 
 #### v0.5.3
