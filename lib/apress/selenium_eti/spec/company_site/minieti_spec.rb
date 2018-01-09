@@ -95,8 +95,8 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем наличие' do
       before { @cs_eti_page.set_exists(CONFIG['eti']['exists']['in stock']) }
 
-      it 'введенная цена отображается' do
-        expect(@cs_eti_page.exists_value).to include 'В наличии'
+      it 'для товара отобразится статус "В наличии"' do
+        expect(@cs_eti_page.exists_value).to match(/[Вв] наличии/)
       end
     end
 
