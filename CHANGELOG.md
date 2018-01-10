@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-01-09 [5e68e96](../../commit/5e68e96) - __(EvgeniaKruglova)__ regexp instead string
+
+#### v0.5.5
+ * 2017-11-24 [f33e736](../../commit/f33e736) - __(rezerbit)__ Release 0.5.5
  * 2017-11-23 [3c0a154](../../commit/3c0a154) - __(ovsyanik)__ fix: add skips for knife
  * 2017-11-21 [f970a40](../../commit/f970a40) - __(ovsyanik)__ fix: add new companies fot eti, minieti & offers_product
 
