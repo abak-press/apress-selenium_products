@@ -59,6 +59,7 @@ module CompanySite
     link(:page_2, xpath: "//*[@data-page='2']")
     link(:page_1, xpath: "//*[@data-page='1']")
     span(:found_products_count, css: '.js-products-count')
+    spans(:product_names, css: '.js-eti-name')
     radio_button(:from_to, xpath: "(//*[@class = 'va-1 mr5 js-select-type-price'])[2]")
     radio_button(:discount, xpath: "(//*[@class = 'va-1 mr5 js-select-type-price'])[3]")
 
@@ -319,6 +320,7 @@ module CompanySite
       check_exact_search
       self.product_search = name
       search_button
+      wait_until { product_names_elements[0] != name }
     end
 
     def delete_product(name)
