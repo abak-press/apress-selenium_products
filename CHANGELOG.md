@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-01-25 [8f93ff2](../../commit/8f93ff2) - __(Copperface)__ Fix: improve tests stability and some fixes https://jira.railsc.ru/browse/[AT-167](../../issues/T-167)
+
+#### v0.5.6
+ * 2018-01-10 [008e7ed](../../commit/008e7ed) - __(Nestrik)__ Release 0.5.6
  * 2018-01-09 [5e68e96](../../commit/5e68e96) - __(EvgeniaKruglova)__ regexp instead string
 
 #### v0.5.5
