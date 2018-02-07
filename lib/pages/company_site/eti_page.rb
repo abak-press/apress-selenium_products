@@ -327,7 +327,9 @@ module CompanySite
       search_product(name)
       Page.button(:delete_product_icon, xpath:
           "//td[@data-text='#{name}']/..//i[contains(@class, 'js-delete-product')]")
+      Page.span(:product_line, xpath: "//td[@data-text='#{name}']/ancestor::tr[contains(@class,'pt-tr')]")
 
+      product_line_element.hover
       confirm(true) { delete_product_icon }
       wait_saving
     end
