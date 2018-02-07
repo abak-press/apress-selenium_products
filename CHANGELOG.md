@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-02-07 [40e9b1c](../../commit/40e9b1c) - __(nestrik)__ fix: invocation of an invisible element
+
+#### v0.5.7
+ * 2018-02-02 [33083b3](../../commit/33083b3) - __(Nestrik)__ Release 0.5.7
  * 2018-01-25 [8f93ff2](../../commit/8f93ff2) - __(Copperface)__ Fix: improve tests stability and some fixes https://jira.railsc.ru/browse/[AT-167](../../issues/T-167)
 
 #### v0.5.6
