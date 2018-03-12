@@ -9,6 +9,7 @@ describe 'Мини-ЕТИ' do
     log_in_as(:user)
     navigate_to_minieti
     @cs_main_page.close_banner
+    @cs_eti_page.close_support_contacts if @cs_eti_page.close_support_contacts?
   end
 
   describe 'Поля' do
