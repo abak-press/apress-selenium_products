@@ -55,7 +55,7 @@ module CompanySite
     span(:rubric_cell, css: '.js-rubric-preview-link')
     text_area(:rubric_search, css: '.js-input-rubric-search')
     button(:rubric_search_submit, css: '.js-button-rubric-search')
-    button(:first_rubric_search_result, css: '.src-link')
+    button(:first_rubric_search_result, css: '.js-src-link')
     link(:page_2, xpath: "//*[@data-page='2']")
     link(:page_1, xpath: "//*[@data-page='1']")
     span(:found_products_count, css: '.js-products-count')
@@ -82,6 +82,7 @@ module CompanySite
     span(:inframe_block, css: '.js-bcm-content')
     span(:group_cell, css: '.js-group-preview-link')
     button(:submit, xpath: "//*[@value='Выбрать']")
+    button(:close_support_contacts, css: '.js-support-contacts-close')
 
     alias old_confirm confirm
     def save
