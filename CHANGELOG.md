@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-03-12 [de98c6a](../../commit/de98c6a) - __(Copperface)__ fix: hide support contacts and fix rubric locator https://jira.railsc.ru/browse/[AT-175](../../issues/T-175)
+
+#### v0.5.8
+ * 2018-02-07 [0bb5fec](../../commit/0bb5fec) - __(Nestrik)__ Release 0.5.8
  * 2018-02-07 [40e9b1c](../../commit/40e9b1c) - __(nestrik)__ fix: invocation of an invisible element
 
 #### v0.5.7
