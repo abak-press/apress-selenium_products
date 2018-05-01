@@ -13,10 +13,9 @@ describe 'Мини-ЕТИ' do
   end
 
   describe 'Поля' do
-    before(:all) { @cs_eti_page.add_product }
-
     context 'когда заполняем имя' do
       before(:all) do
+        @cs_eti_page.add_product
         @name = Faker::Number.number(5)
         @cs_eti_page.set_name(@name)
       end
@@ -27,7 +26,7 @@ describe 'Мини-ЕТИ' do
 
       context 'когда добавляем картинку', skip: !RUN_CONFIG.fetch('local_running', false).to_b do
         before(:all) do
-          @thermometer_value = @cs_eti_page.thermometer_value
+          @therm_value = @cs_eti_page.thermometer_value
           @cs_eti_page.set_image(IMAGE_PATH)
         end
 
@@ -35,17 +34,19 @@ describe 'Мини-ЕТИ' do
           expect(@cs_eti_page.image_loaded?).to be true
         end
 
+        # Подсказка о том что изменения сохранены не появляется
         it 'увеличивается градус на термометре' do
-          @cs_eti_page.wait_saving
-          expect(@cs_eti_page.thermometer_value).to be @thermometer_value + CONFIG['battery_percents']['image']
+          expect(
+            wait_until? { @cs_eti_page.thermometer_value == (@therm_value + CONFIG['battery_percents']['image']) }
+          ).to be true
         end
-
-        after(:all) { @cs_eti_page.close_image_uploader }
       end
     end
 
     context 'когда заполняем цену' do
       before(:all) do
+        @cs_eti_page.add_product
+        @cs_eti_page.set_name(Faker::Number.number(5))
         @thermometer_value = @cs_eti_page.thermometer_value
         @price = Faker::Number.number(3)
 
@@ -64,6 +65,7 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем цену от и до' do
       before(:all) do
         @cs_eti_page.add_product
+        @cs_eti_page.set_name(Faker::Number.number(5))
 
         @thermometer_value = @cs_eti_page.thermometer_value
         @price_from_to = {from: Faker::Number.number(2), to: Faker::Number.number(3)}
@@ -79,6 +81,7 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем цену со скидкой' do
       before(:all) do
         @cs_eti_page.add_product
+        @cs_eti_page.set_name(Faker::Number.number(5))
 
         @thermometer_value = @cs_eti_page.thermometer_value
         @discount_price = {previous: Faker::Number.number(3), discount: Faker::Number.number(2)}
@@ -94,7 +97,11 @@ describe 'Мини-ЕТИ' do
     end
 
     context 'когда заполняем наличие' do
-      before { @cs_eti_page.set_exists(CONFIG['eti']['exists']['in stock']) }
+      before do
+        @cs_eti_page.add_product
+        @cs_eti_page.set_name(Faker::Number.number(5))
+        @cs_eti_page.set_exists(CONFIG['eti']['exists']['in stock'])
+      end
 
       it 'для товара отобразится статус "В наличии"' do
         expect(@cs_eti_page.exists_value).to match(/[Вв] наличии/)
@@ -102,7 +109,12 @@ describe 'Мини-ЕТИ' do
     end
 
     context 'когда заполняем рубрику' do
-      before(:all) { @cs_eti_page.set_rubric(CONFIG['eti']['rubric']) }
+      before(:all) do
+        @cs_eti_page.add_product
+        @cs_eti_page.set_name(Faker::Number.number(5))
+        @rubric = @cs_eti_page.rubric_cell
+        @cs_eti_page.set_rubric(CONFIG['eti']['rubric'])
+      end
 
       it 'привязывается рубрика' do
         expect(@cs_eti_page.rubric_cell).to include CONFIG['eti']['rubric']
@@ -112,7 +124,7 @@ describe 'Мини-ЕТИ' do
         before(:all) { @cs_eti_page.operation_undo }
 
         it 'рубрика исчезает' do
-          expect(@cs_eti_page.rubric_cell).to include 'Указать рубрику'
+          expect(@cs_eti_page.rubric_cell).to eq @rubric
         end
 
         context 'когда повторяем отмененное действие' do
@@ -179,13 +191,12 @@ describe 'Мини-ЕТИ' do
   end
 
   context 'когда выбираем количество товаров на странице' do
-    before do
-      @cs_eti_page.choose_amount_of_products_on_page = '50'
-      @cs_eti_page.wait_saving
-    end
+    before { @cs_eti_page.choose_amount_of_products_on_page(50) }
 
     it 'количество товаров на странице равно выбранному значению' do
-      expect((@cs_eti_page.product_elements.size <= 50) && (@cs_eti_page.product_elements.size > 20))
+      expect(
+        wait_until? { (@cs_eti_page.product_elements.size <= 50) && (@cs_eti_page.product_elements.size > 20) }
+      ).to be true
     end
   end
 end

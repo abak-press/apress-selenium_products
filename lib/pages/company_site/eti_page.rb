@@ -49,7 +49,7 @@ module CompanySite
     button(:close_image_uploader, css: '.ui-resizable .ui-dialog-titlebar-close')
 
     span(:image_uploader, css: '.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable')
-    button(:image_cell, xpath: "//*[@class='ibb-no-photo']/i[@class='fa fa-camera blank-image']")
+    button(:image_cell, css: '.js-upload-photo .blank-image')
     button(:image_upload_btn, css: '.js-upload-input')
     span(:thermometer, css: '.js-battery-wrapper')
     span(:rubric_cell, css: '.js-rubric-preview-link')
@@ -68,7 +68,7 @@ module CompanySite
     button(:publish_product, css: '.dialog-status .published')
     button(:archive_product, css: '.dialog-status .archived')
 
-    select_list(:choose_amount_of_products_on_page, css: '.ptrfap-choose-amount')
+    button(:amount_selector, css: '.ptrfap-choose-amount-wrapper>.custom-combobox>.ui-button')
     divs(:product, css: 'tr.pt-tr')
     div(:save_status, css: '.js-status-bar-content')
     text_area(:product_search, xpath: "//*[@id='product-bindings-search']")
@@ -194,8 +194,7 @@ module CompanySite
         image_cell
         upload_file(upload_image_element, path)
         wait_until { image_loaded? }
-        # TODO
-        # добавить закрытие попапа (close_image_uploader) и изменить кейс в mini_eti_spec
+        close_image_uploader
       end
 
       def set_short_description(text)
@@ -363,6 +362,13 @@ module CompanySite
       group_cell_element.click
       product_group
       submit
+    end
+
+    def choose_amount_of_products_on_page(count)
+      amount_selector
+      Page.button(:product_amount,
+                  xpath: "//*[contains(@class, 'js-choose-amount-combobox')]//*[contains(text(), '#{count}')]")
+      product_amount
     end
 
     ActiveSupport.run_load_hooks(:'apress/selenium_eti/company_site/eti_page', self)
