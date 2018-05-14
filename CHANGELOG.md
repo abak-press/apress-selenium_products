@@ -1,8 +1,13 @@
 
 #### [Current]
- * 2018-05-1 [4185185](../../commit/4185185) - __(Copperface)__ fix: minieti_spec https://jira.railsc.ru/browse/AT-215
+ * 2018-05-04 [ce3be32](../../commit/ce3be32) - __(Клочков А. С)__ update changelog.md
+ * 2018-05-04 [f535111](../../commit/f535111) - __(Клочков А. С)__ Release 0.5.10
+ * 2018-05-04 [c2a3210](../../commit/c2a3210) - __(Клочков А. С)__ Update version.rb
+ * 2018-05-04 [3740159](../../commit/3740159) - __(Клочков А. С)__ Update version.rb
+ * 2018-05-01 [4185185](../../commit/4185185) - __(Copperface)__ fix: minieti_spec https://jira.railsc.ru/browse/[AT-215](../../issues/T-215)
 
 #### v0.5.9
+ * 2018-03-14 [c8ec27e](../../commit/c8ec27e) - __(Nestrik)__ Release 0.5.9
  * 2018-03-12 [de98c6a](../../commit/de98c6a) - __(Copperface)__ fix: hide support contacts and fix rubric locator https://jira.railsc.ru/browse/[AT-175](../../issues/T-175)
 
 #### v0.5.8
