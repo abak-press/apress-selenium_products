@@ -135,6 +135,8 @@ describe 'Мини-ЕТИ' do
           end
         end
       end
+
+      after(:all) { @cs_eti_page.wait_saving }
     end
   end
 
