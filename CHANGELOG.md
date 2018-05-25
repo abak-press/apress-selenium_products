@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-05-24 [de84375](../../commit/de84375) - __(Copperface)__ fix(minieti): waiting for save complete after tests
+
+#### v0.5.12
+ * 2018-05-14 [682254b](../../commit/682254b) - __(Artemklochkov)__ Release 0.5.12
  * 2018-05-04 [ce3be32](../../commit/ce3be32) - __(Клочков А. С)__ update changelog.md
  * 2018-05-04 [f535111](../../commit/f535111) - __(Клочков А. С)__ Release 0.5.10
  * 2018-05-04 [c2a3210](../../commit/c2a3210) - __(Клочков А. С)__ Update version.rb
