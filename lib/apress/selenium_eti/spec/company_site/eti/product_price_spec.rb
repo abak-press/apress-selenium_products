@@ -2,101 +2,98 @@ require 'spec_helper'
 
 describe 'ЕТИ' do
   before(:all) do
-    @cs_eti_page = CompanySite::EtiPage.new
-    @cs_main_page = CompanySite::MainPage.new
+    @cs_eti_table          = CompanySite::ETI::Table.new
+    @cs_eti_header         = CompanySite::ETI::Header.new
+    @cs_eti_table_products = CompanySite::ETI::Table::Products.new
+    @cs_main_page          = CompanySite::MainPage.new
 
     log_in_as(:user)
     navigate_to_eti
     @cs_main_page.close_banner
-    @cs_eti_page.close_support_contacts if @cs_eti_page.close_support_contacts?(2)
+    @cs_eti_table.close_support_contacts if @cs_eti_table.close_support_contacts?(2)
   end
 
   describe 'Установка цен', feature: 'company_site/eti/product_price_spec: Установка цен' do
     before do
       @name = Faker::Number.number(5)
-      @cs_eti_page.add_product
-      @cs_eti_page.set_name(@name)
+      @cs_eti_table_products.add_product(name: @name, price: price)
+      @cs_eti_header.search_product(@name, exact: true)
+      @product = @cs_eti_table_products.product(name: @name)
     end
 
     context 'когда цена точная', story: 'когда цена точная' do
-      before do
-        @price = Faker::Number.number(2)
-        @cs_eti_page.set_price(@price)
-        @cs_eti_page.wait_saving
-        @cs_eti_page.search_product(@name)
-      end
+      let(:price) { {type: :exact, price: Faker::Number.number(2)} }
 
       it 'введеная цена отображается' do
-        expect(@cs_eti_page.product_price(@name)).to eq @price + ' руб.'
+        expect(@cs_eti_table_products.price(@product)).to eq(price[:price] + ' руб.')
       end
     end
 
     context 'когда цена от и до', story: 'когда цена от и до' do
       context 'когда только "от"' do
-        before do
-          @price_from = {from: Faker::Number.number(2)}
-          @cs_eti_page.set_price_from_to(@price_from)
-          @cs_eti_page.wait_saving
-          @cs_eti_page.search_product(@name)
-        end
+        let(:price) { {type: :range, price: Faker::Number.number(2)} }
 
         it 'введеная цена отображается' do
-          expect(@cs_eti_page.product_price(@name)).to eq 'от ' + @price_from[:from] + ' руб.'
+          expect(@cs_eti_table_products.price(@product)).to eq('от ' + price[:price] + ' руб.')
         end
       end
 
       context 'когда только "до"' do
-        before do
-          @price_to = {to: Faker::Number.number(2)}
-          @cs_eti_page.set_price_from_to(@price_to)
-          @cs_eti_page.wait_saving
-          @cs_eti_page.search_product(@name)
-        end
+        let(:price) { {type: :range, price_max: Faker::Number.number(2)} }
 
         it 'введеная цена отображается' do
-          expect(@cs_eti_page.product_price(@name)).to eq 'до ' + @price_to[:to] + ' руб.'
+          expect(@cs_eti_table_products.price(@product)).to eq('до ' + price[:price_max] + ' руб.')
         end
       end
 
       context 'когда заполняем "от" и "до"' do
-        before do
-          @price_from_to = {from: Faker::Number.number(2), to: Faker::Number.number(3)}
-          @cs_eti_page.set_price_from_to(@price_from_to)
-          @cs_eti_page.wait_saving
-          @cs_eti_page.search_product(@name)
-        end
+        let(:price) { {type: :range, price: Faker::Number.number(2), price_max: Faker::Number.number(3)} }
 
         it 'введеная цена отображается' do
-          expect(@cs_eti_page.price_value).to include @price_from_to[:from], @price_from_to[:to]
+          expect(@cs_eti_table_products.price(@product)).to include(price[:price], price[:price_max])
         end
       end
     end
 
     context 'когда цена со скидкой', story: 'когда цена со скидкой' do
-      before do
-        @discount_price = {previous: Faker::Number.number(3), discount: Faker::Number.number(2)}
-        @cs_eti_page.set_discount_price(@discount_price)
-        @cs_eti_page.wait_saving
-        @cs_eti_page.search_product(@name)
+      let(:price) do
+        {
+          type: :discount,
+          price: Faker::Number.number(3),
+          new_price: Faker::Number.number(2),
+          expires_at: Time.now.strftime('%d.%m.%Y')
+        }
       end
 
       it 'введеная цена отображается' do
-        expect(@cs_eti_page.discount_price_value).to include @discount_price[:discount]
-        expect(@cs_eti_page.previous_price_value).to include @discount_price[:previous]
+        expect(@cs_eti_table_products.price(@product)).to include(price[:price], price[:new_price])
+      end
+    end
+  end
+
+  describe 'Установка оптовых цен', feature: 'company_site/eti/product_price_spec: Установка оптовых цен' do
+    before do
+      @name = Faker::Number.number(5)
+      @cs_eti_table_products.add_product(name: @name, wholesale_price: wholesale_price)
+      @cs_eti_header.search_product(@name, exact: true)
+      @product = @cs_eti_table_products.product(name: @name)
+    end
+
+    context 'когда точная оптовая цена', story: 'когда точная оптовая цена' do
+      let(:wholesale_price) { {price: Faker::Number.number(2), min_qty: Faker::Number.number(1)} }
+
+      it 'введеная цена отображается' do
+        expect(@cs_eti_table_products.wholesale_price(@product))
+          .to eq(wholesale_price[:price] + ' руб. /шт.' + ' от ' + wholesale_price[:min_qty] + ' шт.')
       end
     end
 
-    context 'когда цена оптовая', story: 'когда цена оптовая' do
-      before do
-        @price = {wholesale_price: Faker::Number.number(2), wholesale_number: Faker::Number.number(1)}
-        @cs_eti_page.set_wholesale_price(@price)
-        @cs_eti_page.wait_saving
-        @cs_eti_page.search_product(@name)
-      end
+    context 'когда оптовая цена "от"', story: 'когда оптовая цена "от"' do
+      let(:wholesale_price) { {price: Faker::Number.number(2), min_qty: Faker::Number.number(1), not_exact: true} }
 
       it 'введеная цена отображается' do
-        expect(@cs_eti_page.price_value).to eq @price[:wholesale_price] + ' руб. /шт.'
-        expect(@cs_eti_page.wholesale_count_element.text).to eq 'от ' + @price[:wholesale_number] + ' шт.'
+        expect(@cs_eti_table_products.wholesale_price(@product))
+          .to eq('от ' + wholesale_price[:price] + ' руб. /шт.' + ' от ' + wholesale_price[:min_qty] + ' шт.')
       end
     end
   end

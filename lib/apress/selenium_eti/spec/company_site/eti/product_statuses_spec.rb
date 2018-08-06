@@ -2,171 +2,164 @@ require 'spec_helper'
 
 describe 'ЕТИ. Редактирование товара. Статусы' do
   before(:all) do
-    @cs_eti_page = CompanySite::EtiPage.new
-    @cs_main_page = CompanySite::MainPage.new
-    @admin_menu = Admin::Menu.new
-    @admin_products_page = Admin::ProductsPage.new
+    @cs_eti_table          = CompanySite::ETI::Table.new
+    @cs_eti_table_products = CompanySite::ETI::Table::Products.new
+    @cs_eti_header         = CompanySite::ETI::Header.new
+    @cs_main_page          = CompanySite::MainPage.new
+    @admin_menu            = Admin::Menu.new
+    @admin_products_page   = Admin::ProductsPage.new
 
     log_in_as(:user)
     navigate_to_eti
     @cs_main_page.close_banner
-    @cs_eti_page.close_support_contacts if @cs_eti_page.close_support_contacts?(2)
+    @cs_eti_table.close_support_contacts if @cs_eti_table.close_support_contacts?(2)
 
-    @product_1 = {
-      name: Faker::Name.title,
+    @product1_fields = {
+      name: Faker::Job.title,
       rubric: CONFIG['eti']['rubric']
     }
 
-    @product_2 = {
-      name: Faker::Name.title,
+    @product2_fields = {
+      name: Faker::Job.title,
       rubric: CONFIG['eti']['rubric']
     }
 
-    @product_3 = {
-      name: Faker::Name.title,
+    @product3_fields = {
+      name: Faker::Job.title,
       rubric: CONFIG['eti']['rubric']
     }
 
-    @product_4 = {
-      name: Faker::Name.title,
+    @product4_fields = {
+      name: Faker::Job.title,
       rubric: CONFIG['eti']['rubric']
     }
 
-    @cs_eti_page.create_and_set_product_fields(@product_1)
-    @cs_eti_page.create_and_set_product_fields(@product_2)
-    @cs_eti_page.create_and_set_product_fields(@product_3)
-    @cs_eti_page.create_and_set_product_fields(@product_4)
+    @cs_eti_table_products.add_product(@product1_fields)
+    @cs_eti_table_products.add_product(@product2_fields)
+    @cs_eti_table_products.add_product(@product3_fields)
+    @cs_eti_table_products.add_product(@product4_fields)
 
     navigate_to_admin_page
     @admin_menu.products
-    @admin_products_page.accept_product(@product_1[:name])
-    @admin_products_page.accept_product(@product_2[:name])
-    @admin_products_page.reject_product(@product_3[:name])
-    @admin_products_page.reject_product(@product_4[:name])
+    @admin_products_page.accept_product(@product1_fields[:name])
+    @admin_products_page.accept_product(@product2_fields[:name])
+    @admin_products_page.reject_product(@product3_fields[:name])
+    @admin_products_page.reject_product(@product4_fields[:name])
 
     navigate_to_eti
     log_in_as(:user)
     navigate_to_eti
 
-    @cs_eti_page.change_status_to_archived(@product_2[:name])
-    @cs_eti_page.change_status_to_archived(@product_4[:name])
+    @cs_eti_header.search_product(@product2_fields[:name], exact: true)
+    product2 = @cs_eti_table_products.product(name: @product2_fields[:name])
+    @cs_eti_table_products.set_public_state(product2, :archived)
+
+    @cs_eti_header.search_product(@product4_fields[:name], exact: true)
+    product4 = @cs_eti_table_products.product(name: @product4_fields[:name])
+    @cs_eti_table_products.set_public_state(product4, :archived)
   end
 
   after(:all) do
-    navigate_to_eti
-    @cs_eti_page.delete_product(@product_1[:name])
-    @cs_eti_page.delete_product(@product_2[:name])
-    @cs_eti_page.delete_product(@product_3[:name])
-    @cs_eti_page.delete_product(@product_4[:name])
+    # Удалить товары через Апи
   end
 
   context 'когда товары подтверждены' do
-    before(:all) { navigate_to_eti }
+    before do
+      @cs_eti_header.search_product(fields[:name], exact: true)
+      @product = @cs_eti_table_products.product(name: fields[:name])
+
+      @cs_eti_table_products.set_public_state(@product, public_state)
+      @cs_eti_header.search_product(fields[:name], exact: true)
+      @product = @cs_eti_table_products.product(name: fields[:name])
+    end
 
     context 'когда исходный статус "Опубликованный"' do
-      before(:all) { @cs_eti_page.search_product(@product_1[:name]) }
+      let(:fields) { @product1_fields }
 
       context 'когда меняем статус на архивный' do
-        before(:all) do
-          @cs_eti_page.change_status_to_archived(@product_1[:name])
-          Page.browser.navigate.refresh
-        end
+        let(:public_state) { :archived }
 
         it 'статус изменится на архивный' do
-          expect(@cs_eti_page.product_archived?(@product_1[:name])).to be_truthy
+          expect(@cs_eti_table_products.public_state(@product)).to eq(public_state)
         end
       end
 
       context 'когда меняем статус с архивного на опубликованный' do
-        before(:all) do
-          @cs_eti_page.change_status_to_published(@product_1[:name])
-          Page.browser.navigate.refresh
-        end
+        let(:public_state) { :published }
 
         it 'статус изменится на опубликованный' do
-          expect(@cs_eti_page.product_published?(@product_1[:name])).to be_truthy
+          expect(@cs_eti_table_products.public_state(@product)).to eq(public_state)
         end
       end
     end
 
     context 'когда исходный статус "Архивный"' do
-      before(:all) { @cs_eti_page.search_product(@product_2[:name]) }
+      let(:fields) { @product2_fields }
 
       context 'когда меняем статус на опубликованный' do
-        before(:all) do
-          @cs_eti_page.change_status_to_published(@product_2[:name])
-          Page.browser.navigate.refresh
-        end
+        let(:public_state) { :published }
 
         it 'статус изменится на опубликованный' do
-          expect(@cs_eti_page.product_published?(@product_2[:name])).to be_truthy
+          expect(@cs_eti_table_products.public_state(@product)).to eq(public_state)
         end
       end
 
       context 'когда меняем статус с опубликованного на архивный' do
-        before(:all) do
-          @cs_eti_page.change_status_to_archived(@product_2[:name])
-          Page.browser.navigate.refresh
-        end
+        let(:public_state) { :archived }
 
         it 'статус изменится на архивный' do
-          expect(@cs_eti_page.product_archived?(@product_2[:name])).to be_truthy
+          expect(@cs_eti_table_products.public_state(@product)).to eq(public_state)
         end
       end
     end
   end
 
   context 'когда товары отклонены' do
-    before(:all) { navigate_to_eti }
+    before do
+      @cs_eti_header.search_product(fields[:name], exact: true)
+      @product = @cs_eti_table_products.product(name: fields[:name])
+
+      @cs_eti_table_products.set_public_state(@product, public_state)
+      @cs_eti_header.search_product(fields[:name], exact: true)
+      @product = @cs_eti_table_products.product(name: fields[:name])
+    end
 
     context 'когда исходный статус "Отклоненный"' do
-      before(:all) { @cs_eti_page.search_product(@product_3[:name]) }
+      let(:fields) { @product3_fields }
 
       context 'когда меняем статус на архивный' do
-        before(:all) do
-          @cs_eti_page.change_status_to_archived(@product_3[:name])
-          Page.browser.navigate.refresh
-        end
+        let(:public_state) { :archived }
 
         it 'статус изменится на архивный' do
-          expect(@cs_eti_page.product_archived?(@product_3[:name])).to be_truthy
+          expect(@cs_eti_table_products.public_state(@product)).to eq(public_state)
         end
       end
 
       context 'когда меняем статус с архивного на опубликованный' do
-        before(:all) do
-          @cs_eti_page.change_status_to_published(@product_3[:name])
-          Page.browser.navigate.refresh
-        end
+        let(:public_state) { :published }
 
         it 'статус изменится на отклоненный' do
-          expect(@cs_eti_page.product_declined?(@product_3[:name])).to be_truthy
+          expect(@cs_eti_table_products.public_state(@product)).to eq(public_state)
         end
       end
     end
 
     context 'когда исходный статус "Архивный"' do
-      before(:all) { @cs_eti_page.search_product(@product_4[:name]) }
+      let(:fields) { @product4_fields }
 
       context 'когда меняем статус на опубликованный' do
-        before(:all) do
-          @cs_eti_page.change_status_to_published(@product_4[:name])
-          Page.browser.navigate.refresh
-        end
+        let(:public_state) { :published }
 
         it 'статус изменится на отклоненный' do
-          expect(@cs_eti_page.product_declined?(@product_4[:name])).to be_truthy
+          expect(@cs_eti_table_products.public_state(@product)).to eq(public_state)
         end
       end
 
       context 'когда меняем статус с отклоненного на архивный' do
-        before(:all) do
-          @cs_eti_page.change_status_to_archived(@product_4[:name])
-          Page.browser.navigate.refresh
-        end
+        let(:public_state) { :archived }
 
         it 'статус изменится на архивный' do
-          expect(@cs_eti_page.product_archived?(@product_4[:name])).to be_truthy
+          expect(@cs_eti_table_products.public_state(@product)).to eq(public_state)
         end
       end
     end
