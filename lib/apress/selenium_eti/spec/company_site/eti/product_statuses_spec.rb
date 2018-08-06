@@ -10,6 +10,7 @@ describe 'ЕТИ. Редактирование товара. Статусы' do
     log_in_as(:user)
     navigate_to_eti
     @cs_main_page.close_banner
+    @cs_eti_page.close_support_contacts if @cs_eti_page.close_support_contacts?(2)
 
     @product_1 = {
       name: Faker::Name.title,
