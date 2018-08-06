@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-08-06 [b0c4c35](../../commit/b0c4c35) - __(KirillFurtikov)__ fix: close support contacts panel
+
+#### v0.6.0
+ * 2018-08-06 [da53978](../../commit/da53978) - __(Kirill Furtikov)__ Release 0.6.0
  * 2018-08-03 [b46ae49](../../commit/b46ae49) - __(ovsyanik-ka)__ feature(eti): price tests https://jira.railsc.ru/browse/[AT-241](../../issues/T-241)
 
 #### v0.5.13
