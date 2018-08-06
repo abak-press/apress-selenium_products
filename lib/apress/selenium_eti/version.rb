@@ -1,5 +1,5 @@
 module Apress
   module SeleniumEti
-    VERSION = '0.5.13'.freeze
+    VERSION = '0.6.0'.freeze
   end
 end

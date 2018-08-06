@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-08-03 [b46ae49](../../commit/b46ae49) - __(ovsyanik-ka)__ feature(eti): price tests https://jira.railsc.ru/browse/[AT-241](../../issues/T-241)
+
+#### v0.5.13
+ * 2018-05-25 [3f41c00](../../commit/3f41c00) - __(Nestrik)__ Release 0.5.13
  * 2018-05-24 [de84375](../../commit/de84375) - __(Copperface)__ fix(minieti): waiting for save complete after tests
 
 #### v0.5.12
