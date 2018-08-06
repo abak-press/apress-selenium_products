@@ -41,6 +41,7 @@ module CompanySite
     span(:discount_price_value, css: '.discount .bp-price.fsn')
     span(:previous_price_value, css: '.bp-price.fwn.fsn')
     span(:discount_expires_at_date_value, css: '.discount-date')
+    span(:wholesale_count, css: '.js-wholesale-qty-with-measure')
 
     span(:exists_value, css: '.cost-dog-link')
     span(:upload_image, name: 'images')
@@ -369,6 +370,11 @@ module CompanySite
       Page.button(:product_amount,
                   xpath: "//*[contains(@class, 'js-choose-amount-combobox')]//*[contains(text(), '#{count}')]")
       product_amount
+    end
+
+    def product_price(name)
+      Page.span(:price_fill, xpath: "//td[@data-text='#{name}']/..//i[contains(@class, 'bp-price')]")
+      price_fill
     end
 
     ActiveSupport.run_load_hooks(:'apress/selenium_eti/company_site/eti_page', self)
