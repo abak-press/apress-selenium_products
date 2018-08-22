@@ -20,4 +20,5 @@ require "#{gem_directory}/lib/pages/company_site/eti/popups/traits_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/wholesale_price_popup"
 
 # Мини-ЕТИ.
+require "#{gem_directory}/lib/pages/company_site/mini_eti/mini_eti"
 require "#{gem_directory}/lib/pages/company_site/mini_eti/pagination"

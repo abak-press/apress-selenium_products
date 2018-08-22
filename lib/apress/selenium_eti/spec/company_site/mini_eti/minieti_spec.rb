@@ -155,7 +155,7 @@ describe 'Мини-ЕТИ' do
 
         it 'открывается предыдущая страница' do
           expect(no_page_errors?).to be true
-          expect(@cs_mini_eti_pagination.current_page.to_i).to eq(2)
+          expect(@cs_mini_eti_pagination.current_page.to_i).to eq(1)
         end
       end
     end
