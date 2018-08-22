@@ -75,14 +75,6 @@ describe 'ЕТИ' do
         expect(@cs_eti_table_products.products_elements.size).to eq(2)
         expect(@cs_eti_table_products.products_elements[0].text).to eq(@cs_eti_table_products.products_elements[1].text)
       end
-
-      after(:all) do
-        2.times do
-          @cs_eti_header.search_product(@fields[:name], exact: true)
-          product = @cs_eti_table_products.product(name: @fields[:name])
-          @cs_eti_table_products.delete_product(product)
-        end
-      end
     end
   end
 end

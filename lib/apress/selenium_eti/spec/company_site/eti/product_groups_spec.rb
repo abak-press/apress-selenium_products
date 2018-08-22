@@ -40,11 +40,6 @@ describe 'ЕТИ' do
           expect(@cs_eti_table_products.group(@product)).to eq @group2
         end
       end
-
-      after(:all) do
-        product = @cs_eti_table_products.product(name: @name)
-        @cs_eti_table_products.delete_product(product)
-      end
     end
   end
 end

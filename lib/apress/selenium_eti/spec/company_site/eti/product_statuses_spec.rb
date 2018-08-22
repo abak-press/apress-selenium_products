@@ -59,10 +59,6 @@ describe 'ЕТИ. Редактирование товара. Статусы' do
     @cs_eti_table_products.set_public_state(product4, :archived)
   end
 
-  after(:all) do
-    # Удалить товары через Апи
-  end
-
   context 'когда товары подтверждены' do
     before do
       @cs_eti_header.search_product(fields[:name], exact: true)
