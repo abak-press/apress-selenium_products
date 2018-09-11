@@ -63,7 +63,7 @@ describe 'ЕТИ' do
     context 'когда копируем товар' do
       before(:all) do
         @product = {
-          name: Faker::Name.title,
+          name: Faker::Number.number(5),
           rubric: CONFIG['eti']['rubric'],
           exists: CONFIG['eti']['exists']['in stock'],
           short_description: CONFIG['product_creation']['short_description']['valid'],

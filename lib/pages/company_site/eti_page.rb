@@ -237,8 +237,8 @@ module CompanySite
       def set_portal_traits(name, options = {})
         Page.text_area(:trait_1, xpath: "//input[@data-name='#{CONFIG['eti']['portal_traits']['trait_1']}']")
         Page.text_area(:trait_2, xpath: "//input[@data-name='#{CONFIG['eti']['portal_traits']['trait_2']}']")
-        Page.link(:trait_link1, xpath: "//a[text()='#{options.fetch(:trait_1, '')}']")
-        Page.link(:trait_link2, xpath: "//a[text()='#{options.fetch(:trait_2, '')}']")
+        Page.link(:trait_link1, css: ".js-item-trait[data-value='#{options.fetch(:trait_1, '')}']")
+        Page.link(:trait_link2, css: ".js-item-trait[data-value='#{options.fetch(:trait_2, '')}']")
         Page.span(:portal_traits_cell, xpath:
             "//td[@data-text='#{name}']/..//*[contains(text(), 'указать характеристики')]")
 
