@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-09-12 [dd4f370](../../commit/dd4f370) - __(Furtikov Kirill)__ fix(traits): new design of binding popup https://jira.railsc.ru/browse/[AT-252](../../issues/T-252)
+
+#### v0.6.1
+ * 2018-08-06 [a861ac7](../../commit/a861ac7) - __(Kirill Furtikov)__ Release 0.6.1
  * 2018-08-06 [b0c4c35](../../commit/b0c4c35) - __(KirillFurtikov)__ fix: close support contacts panel
 
 #### v0.6.0
