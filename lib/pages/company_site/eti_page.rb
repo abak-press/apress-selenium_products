@@ -105,12 +105,15 @@ module CompanySite
         end
       end
 
+      # TODO: в данном методе double_click добавляется временно.
+      # после решения задачи https://jira.railsc.ru/browse/GOODS-1484 вернуть
+      # .click
+      # .send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
       def set_name(text)
         browser
           .action
           .move_to(name_cell_element.element)
-          .click
-          .send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
+          .double_click
           .send_keys(text)
           .send_keys(Selenium::WebDriver::Keys::KEYS[:enter])
           .perform
