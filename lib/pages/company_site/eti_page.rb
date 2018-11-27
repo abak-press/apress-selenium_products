@@ -45,7 +45,7 @@ module CompanySite
 
     span(:exists_value, css: '.cost-dog-link')
     span(:upload_image, name: 'images')
-    image(:image, css: '.ibb-img.js-img')
+    image(:image, css: '.image-item.js-img')
     # HACK: цепляемся за .ui-resizable, потому что больше нет уникальных идентификаторов
     button(:close_image_uploader, css: '.ui-resizable .ui-dialog-titlebar-close')
 
