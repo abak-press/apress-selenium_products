@@ -24,7 +24,7 @@ describe 'Мини-ЕТИ' do
         expect(@cs_eti_page.product_name?(@name)).to be true
       end
 
-      context 'когда добавляем картинку', skip: !RUN_CONFIG.fetch('local_running', false).to_b do
+      context 'когда добавляем картинку' do
         before(:all) do
           @therm_value = @cs_eti_page.thermometer_value
           @cs_eti_page.set_image(IMAGE_PATH)
