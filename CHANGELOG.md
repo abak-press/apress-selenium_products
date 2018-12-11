@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2018-12-10 [e8aa061](../../commit/e8aa061) - __(ovsyanik-ka)__ fix(selenium) уберем скипы https://jira.railsc.ru/browse/[AT-281](../../issues/T-281)
+
+#### v0.6.4
+ * 2018-11-27 [f5a567c](../../commit/f5a567c) - __(Furtikov Kirill)__ Release 0.6.4
  * 2018-11-19 [0aa5450](../../commit/0aa5450) - __(ovsyanik-ka)__ fix(selenium): after nobile_main
 
 #### v0.6.3
