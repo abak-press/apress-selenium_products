@@ -40,7 +40,7 @@ describe 'ЕТИ' do
         @cs_eti_page.set_name(@name)
         @cs_eti_page.wait_saving
         @cs_eti_page.set_rubric(CONFIG['eti']['rubric'])
-        @cs_eti_page.wait_until { @cs_eti_page.first_product_status_element.attribute('title') == 'Опубликованные' }
+        @cs_eti_page.wait_until { @cs_eti_page.first_product_status_element.attribute('title') == 'Опубликованные на портале' }
         @cs_eti_page.refresh
         @cs_eti_page.search_product(@name)
       end

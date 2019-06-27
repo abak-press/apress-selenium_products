@@ -20,7 +20,7 @@ module CompanySite
     span(:price_cell, xpath: "//*[contains(text(), 'Указать розничную цену')]")
     span(:wholesale_price_cell, css: '.js-eti-wholesaleprice .bp-price-free')
     span(:exist_cell, xpath: "//*[contains(text(), 'Указать наличие')]")
-    button(:add_product, css: '.new.js-add-product')
+    button(:add_product, css: '.js-add-product')
     text_area(:edit_text_area, css: '.edit-text')
 
     text_area(:price_text_area, css: '.js-text-price')
