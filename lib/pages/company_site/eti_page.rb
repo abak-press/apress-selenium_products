@@ -67,7 +67,7 @@ module CompanySite
     button(:operation_undo, css: 'div.operation.undo')
     button(:operation_redo, css: 'div.operation.redo')
     button(:publish_product, css: '.dialog-status .published')
-    button(:archive_product, css: '.dialog-status .archived')
+    button(:archive_product, css: '.dialog-status .manual_archived')
 
     button(:amount_selector, css: '.ptrfap-choose-amount-wrapper>.custom-combobox>.ui-button')
     divs(:product, css: 'tr.pt-tr')
