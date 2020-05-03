@@ -67,7 +67,7 @@ module CompanySite
     button(:operation_undo, css: 'div.operation.undo')
     button(:operation_redo, css: 'div.operation.redo')
     button(:publish_product, css: '.dialog-status .published')
-    button(:archive_product, css: '.dialog-status .manual_archived')
+    button(:archive_product, css: '.dialog-status .archived')
 
     button(:amount_selector, css: '.ptrfap-choose-amount-wrapper>.custom-combobox>.ui-button')
     divs(:product, css: 'tr.pt-tr')
@@ -354,7 +354,7 @@ module CompanySite
     end
 
     def change_status_to_archived(name)
-      Page.button(:product_status, xpath: "//*[@data-text='#{name}']/..//*[contains(@class, 'js-status-icon')]")
+      Page.button(:product_status, xpath: "//*[@data-text='#{name}']/..//*[contains(@class, 'js-change-status')]")
       product_status
       archive_product
 
