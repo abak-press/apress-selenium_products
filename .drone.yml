@@ -1,0 +1,15 @@
+name: build
+
+kind: pipeline
+type: docker
+
+steps:
+  - name: release
+    image: abakpress/gem-publication:latest
+    pull: true
+    when:
+      event: push
+      branch: master
+      status: success
+    commands:
+      - release-gem
