@@ -46,9 +46,9 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем цену' do
       before(:all) do
         @cs_eti_page.add_product
-        @cs_eti_page.set_name(Faker::Number.number(5))
+        @cs_eti_page.set_name(Faker::Number.number(digits: 5))
         @thermometer_value = @cs_eti_page.thermometer_value
-        @price = Faker::Number.number(3)
+        @price = Faker::Number.number(digits: 3)
 
         @cs_eti_page.set_price(@price)
       end
@@ -65,10 +65,10 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем цену от и до' do
       before(:all) do
         @cs_eti_page.add_product
-        @cs_eti_page.set_name(Faker::Number.number(5))
+        @cs_eti_page.set_name(Faker::Number.number(digits: 5))
 
         @thermometer_value = @cs_eti_page.thermometer_value
-        @price_from_to = {from: Faker::Number.number(2), to: Faker::Number.number(3)}
+        @price_from_to = {from: Faker::Number.number(digits: 2), to: Faker::Number.number(digits: 3)}
 
         @cs_eti_page.set_price_from_to(@price_from_to)
       end
@@ -81,10 +81,10 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем цену со скидкой' do
       before(:all) do
         @cs_eti_page.add_product
-        @cs_eti_page.set_name(Faker::Number.number(5))
+        @cs_eti_page.set_name(Faker::Number.number(digits: 5))
 
         @thermometer_value = @cs_eti_page.thermometer_value
-        @discount_price = {previous: Faker::Number.number(3), discount: Faker::Number.number(2)}
+        @discount_price = {previous: Faker::Number.number(digits: 3), discount: Faker::Number.number(digits: 2)}
 
         @cs_eti_page.set_discount_price(@discount_price)
       end
@@ -99,7 +99,7 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем наличие' do
       before do
         @cs_eti_page.add_product
-        @cs_eti_page.set_name(Faker::Number.number(5))
+        @cs_eti_page.set_name(Faker::Number.number(digits: 5))
         @cs_eti_page.set_exists(CONFIG['eti']['exists']['in stock'])
       end
 
@@ -111,7 +111,7 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем рубрику' do
       before(:all) do
         @cs_eti_page.add_product
-        @cs_eti_page.set_name(Faker::Number.number(5))
+        @cs_eti_page.set_name(Faker::Number.number(digits: 5))
         @rubric = @cs_eti_page.rubric_cell
         @cs_eti_page.set_rubric(CONFIG['eti']['rubric'])
       end
@@ -165,7 +165,7 @@ describe 'Мини-ЕТИ' do
   describe 'Удаление товара' do
     before do
       @cs_eti_page.add_product
-      @name = Faker::Number.number(5)
+      @name = Faker::Number.number(digits: 5)
       @cs_eti_page.set_name(@name)
       @cs_mini_eti_page.delete_first_product
     end
@@ -178,9 +178,9 @@ describe 'Мини-ЕТИ' do
   describe 'Копирование товара' do
     before do
       @cs_eti_page.add_product
-      @name = Faker::Pokemon.name
+      @name = Faker::Games::Pokemon.name
       @cs_eti_page.set_name(@name)
-      @cs_eti_page.set_price(@price = Faker::Number.number(5))
+      @cs_eti_page.set_price(@price = Faker::Number.number(digits: 5))
       @cs_eti_page.wait_saving
 
       @cs_mini_eti_page.copy_product
