@@ -1,7 +1,11 @@
+# v0.6.8
+
+* 2021-04-09 [70b8cc6](../../commit/70b8cc6) - __(ovsyanik-ka)__ Release 0.6.8 
+* 2021-04-09 [38c8247](../../commit/38c8247) - __(ovsyanik-ka)__ fix(selenium): fix/AT-383 
+
 # v0.6.7
 
 * 2020-10-07 [e3b35ae](../../commit/e3b35ae) - __(Andrew N. Shalaev)__ feature: add drone CI 
-* 2020-05-22 [d1652c7](../../commit/d1652c7) - __(ovsyanik-ka)__ Release 0.6.7 
 * 2020-05-03 [153748e](../../commit/153748e) - __(ovsyanik-ka)__ fix: after release 
 * 2019-08-14 [821f5a0](../../commit/821f5a0) - __(afdolina)__ release 0.6.6 
 * 2019-08-14 [667c3c0](../../commit/667c3c0) - __(afdolina)__ revert gem version 
