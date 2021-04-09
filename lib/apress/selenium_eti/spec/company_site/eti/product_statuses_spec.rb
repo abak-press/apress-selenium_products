@@ -13,22 +13,22 @@ describe 'ЕТИ. Редактирование товара. Статусы' do
     @cs_eti_page.close_support_contacts if @cs_eti_page.close_support_contacts?(2)
 
     @product_1 = {
-      name: Faker::Name.title,
+      name: Faker::Name.name,
       rubric: CONFIG['eti']['rubric']
     }
 
     @product_2 = {
-      name: Faker::Name.title,
+      name: Faker::Name.name,
       rubric: CONFIG['eti']['rubric']
     }
 
     @product_3 = {
-      name: Faker::Name.title,
+      name: Faker::Name.name,
       rubric: CONFIG['eti']['rubric']
     }
 
     @product_4 = {
-      name: Faker::Name.title,
+      name: Faker::Name.name,
       rubric: CONFIG['eti']['rubric']
     }
 
@@ -50,14 +50,6 @@ describe 'ЕТИ. Редактирование товара. Статусы' do
 
     @cs_eti_page.change_status_to_archived(@product_2[:name])
     @cs_eti_page.change_status_to_archived(@product_4[:name])
-  end
-
-  after(:all) do
-    navigate_to_eti
-    @cs_eti_page.delete_product(@product_1[:name])
-    @cs_eti_page.delete_product(@product_2[:name])
-    @cs_eti_page.delete_product(@product_3[:name])
-    @cs_eti_page.delete_product(@product_4[:name])
   end
 
   context 'когда товары подтверждены' do

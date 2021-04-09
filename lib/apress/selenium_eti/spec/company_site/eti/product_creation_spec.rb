@@ -14,7 +14,7 @@ describe 'ЕТИ' do
   describe 'Создание товара' do
     context 'когда товар без рубрики' do
       before(:all) do
-        @name = Faker::Number.number(5)
+        @name = Faker::Number.number(digits: 5)
         @cs_eti_page.add_product
         @cs_eti_page.set_name(@name)
         @cs_eti_page.wait_saving
@@ -35,7 +35,7 @@ describe 'ЕТИ' do
 
     context 'когда товар с рубрикой' do
       before(:all) do
-        @name = Faker::Number.number(5)
+        @name = Faker::Number.number(digits: 5)
         @cs_eti_page.add_product
         @cs_eti_page.set_name(@name)
         @cs_eti_page.wait_saving
@@ -63,13 +63,13 @@ describe 'ЕТИ' do
     context 'когда копируем товар' do
       before(:all) do
         @product = {
-          name: Faker::Number.number(5),
+          name: Faker::Number.number(digits: 5),
           rubric: CONFIG['eti']['rubric'],
           exists: CONFIG['eti']['exists']['in stock'],
           short_description: CONFIG['product_creation']['short_description']['valid'],
           description: 'description',
-          price_from_to: {from: Faker::Number.number(3), to: Faker::Number.number(4)},
-          wholesale_price: {wholesale_price: Faker::Number.number(2), wholesale_number: Faker::Number.number(2)}
+          price_from_to: {from: Faker::Number.number(digits: 3), to: Faker::Number.number(digits: 4)},
+          wholesale_price: {wholesale_price: Faker::Number.number(digits: 2), wholesale_number: Faker::Number.number(digits: 2)}
         }
 
         @portal_traits = {
@@ -94,7 +94,6 @@ describe 'ЕТИ' do
         expect(@cs_eti_page.product_rows_elements[1].text).to eq @first_product
       end
 
-      after(:all) { 2.times { @cs_eti_page.delete_product(@product[:name]) } }
     end
   end
 end
