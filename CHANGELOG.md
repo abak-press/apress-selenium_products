@@ -1,6 +1,10 @@
+# v0.6.9
+
+* 2021-05-05 [0712bdc](../../commit/0712bdc) - __(ovsyanik-ka)__ Release 0.6.9 
+* 2021-04-30 [8b7a60e](../../commit/8b7a60e) - __(ovsyanik-ka)__ fix(selenium): fix after release april 
+
 # v0.6.8
 
-* 2021-04-09 [70b8cc6](../../commit/70b8cc6) - __(ovsyanik-ka)__ Release 0.6.8 
 * 2021-04-09 [38c8247](../../commit/38c8247) - __(ovsyanik-ka)__ fix(selenium): fix/AT-383 
 
 # v0.6.7
