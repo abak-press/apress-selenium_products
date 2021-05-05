@@ -63,7 +63,7 @@ describe 'ЕТИ' do
     context 'когда копируем товар' do
       before(:all) do
         @product = {
-          name: Faker::Number.number(digits: 5),
+          name: Faker::Number.leading_zero_number(digits: 5),
           rubric: CONFIG['eti']['rubric'],
           exists: CONFIG['eti']['exists']['in stock'],
           short_description: CONFIG['product_creation']['short_description']['valid'],
@@ -93,7 +93,6 @@ describe 'ЕТИ' do
         expect(@cs_eti_page.product_rows_elements.length).to eq 2
         expect(@cs_eti_page.product_rows_elements[1].text).to eq @first_product
       end
-
     end
   end
 end
