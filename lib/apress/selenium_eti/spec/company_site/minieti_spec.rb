@@ -16,7 +16,7 @@ describe 'Мини-ЕТИ' do
     context 'когда заполняем имя' do
       before(:all) do
         @cs_eti_page.add_product
-        @name = Faker::Number.leading_zero_number(5)
+        @name = Faker::Number.leading_zero_number(digits: 5)
         @cs_eti_page.set_name(@name)
       end
 
