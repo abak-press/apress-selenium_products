@@ -1,6 +1,10 @@
+# v0.6.11
+
+* 2021-07-28 [28279c4](../../commit/28279c4) - __(ovsyanik-ka)__ Release 0.6.11 
+* 2021-07-28 [5e26a57](../../commit/5e26a57) - __(ovsyanik-ka)__ fix(selenium)L after july-1 
+
 # v0.6.10
 
-* 2021-07-12 [adad9e6](../../commit/adad9e6) - __(ovsyanik-ka)__ Release 0.6.10 
 * 2021-07-09 [20eb62a](../../commit/20eb62a) - __(BalmasovAS)__  files inspected, 1 offense detected, 1 offense corrected 
 
 # v0.6.9
