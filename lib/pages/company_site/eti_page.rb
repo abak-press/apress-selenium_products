@@ -154,24 +154,14 @@ module CompanySite
       end
 
       def set_price(text)
-        browser
-          .action
-          .move_to(price_cell_element.element)
-          .click
-          .send_keys(price_text_area_element.element, text)
-          .perform
-
+        price_cell_element.click
+        self.price_text_area = text
         try_to(:save_price)
         wait_saving
       end
 
       def set_wholesale_price(options = {})
-        browser
-          .action
-          .move_to(wholesale_price_cell_element.element)
-          .click
-          .perform
-
+        wholesale_price_cell_element.click
         self.wholesale_price = options.fetch(:wholesale_price, '')
         self.wholesale_number = options.fetch(:wholesale_number, '')
 
@@ -180,11 +170,7 @@ module CompanySite
       end
 
       def set_rubric(text)
-        browser
-          .action
-          .move_to(rubric_cell_element.element)
-          .click
-          .perform
+        rubric_cell_element.click
 
         self.rubric_search = text
         rubric_search_submit

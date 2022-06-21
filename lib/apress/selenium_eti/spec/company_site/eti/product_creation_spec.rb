@@ -14,7 +14,7 @@ describe 'ЕТИ' do
   describe 'Создание товара' do
     context 'когда товар без рубрики' do
       before(:all) do
-        @name = Faker::Number.leading_zero_number(digits: 5)
+        @name = Faker::Number.leading_zero_number(digits: 5).to_s
         @cs_eti_page.add_product
         @cs_eti_page.set_name(@name)
         @cs_eti_page.wait_saving
@@ -35,7 +35,7 @@ describe 'ЕТИ' do
 
     context 'когда товар с рубрикой' do
       before(:all) do
-        @name = Faker::Number.number(digits: 5)
+        @name = Faker::Number.number(digits: 5).to_s
         @cs_eti_page.add_product
         @cs_eti_page.set_name(@name)
         @cs_eti_page.wait_saving
