@@ -1,6 +1,10 @@
+# v0.6.12
+
+* 2022-06-23 [98562be](../../commit/98562be) - __(ovsyanik-ka)__ Release 0.6.12 
+* 2022-06-21 [e4685d5](../../commit/e4685d5) - __(ovsyanik-ka)__ fix(selenium): fix eti after new browser 
+
 # v0.6.11
 
-* 2021-07-28 [28279c4](../../commit/28279c4) - __(ovsyanik-ka)__ Release 0.6.11 
 * 2021-07-28 [5e26a57](../../commit/5e26a57) - __(ovsyanik-ka)__ fix(selenium)L after july-1 
 
 # v0.6.10
