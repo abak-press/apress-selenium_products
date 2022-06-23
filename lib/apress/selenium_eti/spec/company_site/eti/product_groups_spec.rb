@@ -13,7 +13,7 @@ describe 'ЕТИ' do
   describe 'Добавление групп' do
     context 'когда привязываем группу к товару' do
       before(:all) do
-        @product = {name: Faker::Number.number(digits: 5)}
+        @product = {name: Faker::Number.number(digits: 5).to_s}
         @cs_eti_page.create_and_set_product_fields(@product)
         @cs_eti_page.set_group(CONFIG['product_creation']['group'])
         @cs_eti_page.wait_saving

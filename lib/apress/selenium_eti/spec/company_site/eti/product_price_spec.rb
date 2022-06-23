@@ -13,7 +13,7 @@ describe 'ЕТИ' do
 
   describe 'Установка цен', feature: 'company_site/eti/product_price_spec: Установка цен' do
     before do
-      @name = Faker::Number.number(digits: 5)
+      @name = Faker::Number.number(digits: 5).to_s
       @cs_eti_page.add_product
       @cs_eti_page.set_name(@name)
     end
