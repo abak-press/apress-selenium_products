@@ -27,7 +27,13 @@ describe 'ЕТИ' do
       end
 
       it 'введеная цена отображается' do
-        expect(@cs_eti_page.product_price(@name)).to eq @price.to_s + ' руб.'
+        if @cs_eti_page.project_pulscen?
+          expect(@cs_eti_page.product_price(@name)).to eq @price.to_s + ' руб.'
+        elsif @cs_eti_page.project_blizko?
+          expect(@cs_eti_page.product_price(@name)).to eq @price.to_s + ' ₽'
+        else
+          raise ArgumentError, 'locator not found'
+        end
       end
     end
 
@@ -41,7 +47,13 @@ describe 'ЕТИ' do
         end
 
         it 'введеная цена отображается' do
-          expect(@cs_eti_page.product_price(@name)).to eq 'от ' + @price_from[:from].to_s + ' руб.'
+          if @cs_eti_page.project_pulscen?
+            expect(@cs_eti_page.product_price(@name)).to eq 'от ' + @price_from[:from].to_s + ' руб.'
+          elsif @cs_eti_page.project_blizko?
+            expect(@cs_eti_page.product_price(@name)).to eq 'от ' + @price_from[:from].to_s + ' ₽'
+          else
+            raise ArgumentError, 'locator not found'
+          end
         end
       end
 
@@ -54,7 +66,13 @@ describe 'ЕТИ' do
         end
 
         it 'введеная цена отображается' do
-          expect(@cs_eti_page.product_price(@name)).to eq 'до ' + @price_to[:to].to_s + ' руб.'
+          if @cs_eti_page.project_pulscen?
+            expect(@cs_eti_page.product_price(@name)).to eq 'до ' + @price_to[:to].to_s + ' руб.'
+          elsif @cs_eti_page.project_blizko?
+            expect(@cs_eti_page.product_price(@name)).to eq 'до ' + @price_to[:to].to_s + ' ₽'
+          else
+            raise ArgumentError, 'locator not found'
+          end
         end
       end
 
@@ -95,7 +113,13 @@ describe 'ЕТИ' do
       end
 
       it 'введеная цена отображается' do
-        expect(@cs_eti_page.price_value).to eq @price[:wholesale_price].to_s + ' руб. /шт.'
+        if @cs_eti_page.project_pulscen?
+          expect(@cs_eti_page.price_value).to eq @price[:wholesale_price].to_s + ' руб. /шт.'
+        elsif @cs_eti_page.project_blizko?
+          expect(@cs_eti_page.price_value).to eq @price[:wholesale_price].to_s + ' ₽ /шт.'
+        else
+          raise ArgumentError, 'locator not found'
+        end
         expect(@cs_eti_page.wholesale_count_element.text).to eq 'от ' + @price[:wholesale_number].to_s + ' шт.'
       end
     end

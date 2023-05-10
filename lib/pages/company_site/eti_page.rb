@@ -82,8 +82,11 @@ module CompanySite
     divs(:product_rows, css: '.js-pt-tr')
     span(:inframe_block, css: '.js-bcm-content')
     span(:group_cell, css: '.js-group-preview-link')
-    button(:submit, xpath: "//*[@value='Выбрать']")
+    button(:submit, css: '.groups-popup__save-button')
     button(:close_support_contacts, css: '.js-support-contacts-close')
+
+    title(:project_pulscen, xpath: "//title[contains(text(), 'Пульс')]")
+    title(:project_blizko, xpath: "//a[@title='Главная страница Blizko']")
 
     alias old_confirm confirm
     def save
@@ -319,7 +322,7 @@ module CompanySite
           "//td[@data-text='#{name}']/..//i[contains(@class, 'js-delete-product')]")
       Page.span(:product_line, xpath: "//td[@data-text='#{name}']/ancestor::tr[contains(@class,'pt-tr')]")
 
-      product_line_element.hover
+      browser.action.move_to(product_line_element.element).perform
       confirm(true) { delete_product_icon }
       wait_saving
     end
