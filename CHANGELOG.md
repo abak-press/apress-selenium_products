@@ -1,6 +1,10 @@
+# v0.6.13
+
+* 2023-06-07 [8a5e7b1](../../commit/8a5e7b1) - __(denis)__ Release 0.6.13 
+* 2023-05-10 [97016ba](../../commit/97016ba) - __(KirillGaliulin)__ fix(selenium): fix specs eti https://jira.railsc.ru/browse/AT-557 
+
 # v0.6.12
 
-* 2022-06-23 [98562be](../../commit/98562be) - __(ovsyanik-ka)__ Release 0.6.12 
 * 2022-06-21 [e4685d5](../../commit/e4685d5) - __(ovsyanik-ka)__ fix(selenium): fix eti after new browser 
 
 # v0.6.11
