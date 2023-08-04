@@ -84,6 +84,7 @@ module CompanySite
     span(:group_cell, css: '.js-group-preview-link')
     button(:submit, css: '.groups-popup__save-button')
     button(:close_support_contacts, css: '.js-support-contacts-close')
+    button(:navigate_to_groups, css: '[for=rubricator_type_groups]')
 
     title(:project_pulscen, xpath: "//title[contains(text(), 'Пульс')]")
     title(:project_blizko, xpath: "//a[@title='Главная страница Blizko']")
@@ -255,7 +256,8 @@ module CompanySite
       end
 
       def set_exists(value)
-        Page.link(:exists_link, xpath: "//li/a[text()='#{value}']")
+        Page.link(:exists_link, xpath: "//label[text()[contains(., '#{value}')]]")
+        Page.button(:save_exists, css: '.popup-exists__save-button')
 
         browser
           .action
@@ -264,6 +266,7 @@ module CompanySite
           .perform
 
         exists_link
+        save_exists
         wait_saving
       end
     end
@@ -352,6 +355,7 @@ module CompanySite
 
     def set_group(name)
       Page.button(:product_group, xpath: "//*[@id='popup-content']//*[contains(text(), '#{name}')]")
+      wait_until { group_cell? }
       group_cell_element.click
       product_group
       submit
