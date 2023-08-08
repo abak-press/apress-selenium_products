@@ -1,6 +1,10 @@
+# v0.6.14
+
+* 2023-08-08 [d9837ae](../../commit/d9837ae) - __(denis)__ Release 0.6.14 
+* 2023-08-04 [af880db](../../commit/af880db) - __(KirillGaliulin)__ fix(selenium): fix eti after release goods-june, goods-jule 
+
 # v0.6.13
 
-* 2023-06-07 [8a5e7b1](../../commit/8a5e7b1) - __(denis)__ Release 0.6.13 
 * 2023-05-10 [97016ba](../../commit/97016ba) - __(KirillGaliulin)__ fix(selenium): fix specs eti https://jira.railsc.ru/browse/AT-557 
 
 # v0.6.12
