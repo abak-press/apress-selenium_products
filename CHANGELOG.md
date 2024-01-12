@@ -1,6 +1,10 @@
+# v0.6.15
+
+* 2024-01-12 [a41b9ef](../../commit/a41b9ef) - __(KirillGaliulin)__ Release 0.6.15 
+* 2023-12-26 [9ad2c9a](../../commit/9ad2c9a) - __(KirillGaliulin)__ feature: refactoring commit 1 fix specs: product_creation_spec.rb and product_groups_spec.rb 
+
 # v0.6.14
 
-* 2023-08-08 [d9837ae](../../commit/d9837ae) - __(denis)__ Release 0.6.14 
 * 2023-08-04 [af880db](../../commit/af880db) - __(KirillGaliulin)__ fix(selenium): fix eti after release goods-june, goods-jule 
 
 # v0.6.13
