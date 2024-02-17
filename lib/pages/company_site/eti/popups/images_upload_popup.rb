@@ -7,7 +7,7 @@ module CompanySite
         div(:popup, css: '.js-popup-photo')
 
         button(:close, css: '.ui-dialog:not([style*="display: none"]) .ui-dialog-titlebar-close')
-        file_field(:upload_image_input, css: '.js-popup-photo .js-upload-input')
+        file_field(:upload_image_input, css: '.js-popup-photo .js-upload-image-input')
         text_area(:image_url, css: '.js-popup-photo .js-download-input')
         button(:image_url_submit, css: '.js-popup-photo .js-download-button')
         elements(:uploaded_images, css: '.js-popup-photo .js-img')

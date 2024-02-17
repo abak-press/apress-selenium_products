@@ -17,10 +17,10 @@ describe 'Мини-ЕТИ' do
     @cs_eti_table.close_support_contacts if @cs_eti_table.close_support_contacts?(2)
   end
 
-  describe 'Поля' do
-    context 'когда заполняем имя' do
-      before(:all) do
-        @name = Faker::Number.number(5)
+  describe 'Заполнение полей' do
+    context 'когда заполняется имя' do
+      before do
+        @name = Faker::Number.number(digits: 5).to_s
         @cs_eti_table_products.add_product(name: @name)
         @product = @cs_eti_table_products.product(name: @name)
       end
@@ -28,87 +28,102 @@ describe 'Мини-ЕТИ' do
       it 'введенное имя отображается' do
         expect(@cs_eti_table_products.name(@product)).to eq(@name)
       end
+    end
 
-      context 'когда добавляем картинку', skip: !RUN_CONFIG.fetch('local_running', false).to_b do
+    context 'когда загружается изображение' do
+      before(:all) do
+        @name = Faker::Number.number(digits: 5).to_s
+        @cs_eti_table_products.add_product(name: @name)
+        @product = @cs_eti_table_products.product(name: @name)
+        @battery = @cs_eti_table_products.battery(@product)
+        @image = @cs_eti_table_products.image(@product)
+        @cs_eti_table_products.upload_image(@product, type: :local, path: IMAGE_PATH)
+      end
+
+      it 'изображение появляется' do
+        expect(@cs_eti_table_products.image(@product)[:url]).to be_truthy
+      end
+
+      it 'счетчик изображений увеличится на 1' do
+        expect(@cs_eti_table_products.image(@product)[:counts]).to eq(@image[:counts] + 1)
+      end
+
+      it 'увеличивается заряд батарейки' do
+        expect(@cs_eti_table_products.battery(@product)[:level])
+          .to eq(@battery[:level] + CONFIG['battery_percents']['image'])
+      end
+    end
+
+    describe 'Установка розничных цен', feature: 'company_site/eti/product_price_spec: Установка цен' do
+      context 'когда цена точная' do
         before(:all) do
+          @name = Faker::Number.number(digits: 5).to_s
+          @price = {type: :exact, price: Faker::Number.number(digits: 3)}
+          @cs_eti_table_products.add_product(name: @name)
+          @product = @cs_eti_table_products.product(name: @name)
           @battery = @cs_eti_table_products.battery(@product)
-          @image = @cs_eti_table_products.image(@product)
-          @cs_eti_table_products.upload_image(@product, type: :local, path: IMAGE_PATH)
+          @cs_eti_table_products.set_price(@product, @price)
         end
 
-        it 'картинка появляется' do
-          expect(@cs_eti_table_products.image(@product)[:url]).to be_truthy
-        end
-
-        it 'счетчик изображений увеличится на 1' do
-          expect(@cs_eti_table_products.image(@product)[:counts]).to eq(@image[:counts] + 1)
+        it 'введенная цена отображается' do
+          expect(@cs_eti_table_products.price(@product)).to include(@price[:price].to_s)
         end
 
         it 'увеличивается заряд батарейки' do
           expect(@cs_eti_table_products.battery(@product)[:level])
-            .to eq(@battery[:level] + CONFIG['battery_percents']['image'])
+            .to eq(@battery[:level] + CONFIG['battery_percents']['price'])
+        end
+      end
+
+      context 'когда цена от и до' do
+        before(:all) do
+          @name = Faker::Number.number(digits: 5).to_s
+          @cs_eti_table_products.add_product(name: @name)
+          @product = @cs_eti_table_products.product(name: @name)
+          @battery = @cs_eti_table_products.battery(@product)
+          @price_range = {
+            type: :range,
+            price: Faker::Number.number(digits: 2),
+            price_max: Faker::Number.number(digits: 3),
+          }
+          @cs_eti_table_products.set_price(@product, @price_range)
+        end
+
+        it 'введенная цена отображается' do
+          expect(@cs_eti_table_products.price(@product))
+            .to include(@price_range[:price].to_s, @price_range[:price_max].to_s)
+        end
+      end
+
+      context 'когда цена со скидкой' do
+        before(:all) do
+          @name = Faker::Number.number(digits: 5).to_s
+          @cs_eti_table_products.add_product(name: @name)
+          @product = @cs_eti_table_products.product(name: @name)
+          @battery = @cs_eti_table_products.battery(@product)
+          @discount_price = {
+            type: :discount,
+            price: Faker::Number.number(digits: 3),
+            new_price: Faker::Number.number(digits: 2),
+            expires_at: Time.now.strftime('%d.%m.%Y'),
+          }
+
+          @cs_eti_table_products.set_price(@product, @discount_price)
+        end
+
+        it 'введенные цены и дата окончания скидки отображаются' do
+          expect(@cs_eti_table_products.price(@product))
+            .to include(@discount_price[:price].to_s, @discount_price[:new_price].to_s)
         end
       end
     end
 
-    context 'когда заполняем цену' do
-      before(:all) do
-        @name = Faker::Number.number(5)
-        @cs_eti_table_products.add_product(name: @name)
-        @product = @cs_eti_table_products.product(name: @name)
-        @battery = @cs_eti_table_products.battery(@product)
-        @price = {type: :exact, price: Faker::Number.number(3)}
-        @cs_eti_table_products.set_price(@product, @price)
-      end
-
-      it('введенная цена отображается') { expect(@cs_eti_table_products.price(@product)).to include(@price[:price]) }
-
-      it 'увеличивается заряд батарейки' do
-        expect(@cs_eti_table_products.battery(@product)[:level])
-          .to eq(@battery[:level] + CONFIG['battery_percents']['price'])
-      end
-    end
-
-    context 'когда заполняем цену от и до' do
-      before(:all) do
-        @name = Faker::Number.number(5)
-        @cs_eti_table_products.add_product(name: @name)
-        @product = @cs_eti_table_products.product(name: @name)
-        @battery = @cs_eti_table_products.battery(@product)
-        @price_range = {type: :range, price: Faker::Number.number(2), price_max: Faker::Number.number(3)}
-
-        @cs_eti_table_products.set_price(@product, @price_range)
-      end
-
-      it 'введенная цена отображается' do
-        expect(@cs_eti_table_products.price(@product)).to include @price_range[:price], @price_range[:price_max]
-      end
-    end
-
-    context 'когда заполняем цену со скидкой' do
-      before(:all) do
-        @name = Faker::Number.number(5)
-        @cs_eti_table_products.add_product(name: @name)
-        @product = @cs_eti_table_products.product(name: @name)
-        @battery = @cs_eti_table_products.battery(@product)
-        @discount_price = {
-          type: :discount,
-          price: Faker::Number.number(3),
-          new_price: Faker::Number.number(2),
-          expires_at: Time.now.strftime('%d.%m.%Y'),
-        }
-
-        @cs_eti_table_products.set_price(@product, @discount_price)
-      end
-
-      it 'введенные цены и дата окончания скидки отображаются' do
-        expect(@cs_eti_table_products.price(@product)).to include(@discount_price[:price], @discount_price[:new_price])
-      end
-    end
-
-    context 'когда заполняем наличие' do
+    context 'когда заполняется наличие' do
       before do
-        @product = @cs_eti_table_products.add_product(name: Faker::Number.number(5), exists: :available)
+        @product = @cs_eti_table_products.add_product(
+          name: Faker::Number.number(digits: 5).to_s,
+          exists: :available
+        )
       end
 
       it 'для товара отобразится статус "В наличии"' do
@@ -116,9 +131,12 @@ describe 'Мини-ЕТИ' do
       end
     end
 
-    context 'когда заполняем рубрику' do
+    context 'когда заполняется рубрика' do
       before(:all) do
-        @product = @cs_eti_table_products.add_product(name: Faker::Number.number(5), rubric: CONFIG['eti']['rubric'])
+        @product = @cs_eti_table_products.add_product(
+          name: Faker::Number.number(digits: 5).to_s,
+          rubric: CONFIG['eti']['rubric']
+        )
       end
 
       it 'привязывается рубрика' do
@@ -173,22 +191,23 @@ describe 'Мини-ЕТИ' do
 
   describe 'Удаление товара' do
     before do
-      name = Faker::Number.number(5)
+      name = Faker::Number.number(digits: 5).to_s
       @product = @cs_eti_table_products.add_product(name: name)
     end
 
     it 'товар удаляется' do
-      expect { @cs_eti_table_products.delete_product(@product) } .to change { @product.visible? }.from(true).to(false)
+      expect { @cs_eti_table_products.delete_product(@product) }
+        .to change { @product.visible? }.from(true).to(false)
     end
   end
 
   describe 'Копирование товара' do
     before do
       @fields = {
-        name: Faker::Number.number(5),
+        name: Faker::Number.number(digits: 5).to_s,
         price: {
           type: :exact,
-          price: Faker::Number.number(5),
+          price: Faker::Number.number(digits: 5),
         },
       }
       @product = @cs_eti_table_products.add_product(@fields)
@@ -196,7 +215,8 @@ describe 'Мини-ЕТИ' do
     end
 
     it 'товар скопирован' do
-      expect(@cs_eti_table_products.products_elements[0].text).to eq(@cs_eti_table_products.products_elements[1].text)
+      expect(@cs_eti_table_products.products_elements[0].text)
+        .to eq(@cs_eti_table_products.products_elements[1].text)
     end
   end
 end

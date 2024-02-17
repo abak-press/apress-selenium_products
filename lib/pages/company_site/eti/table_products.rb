@@ -4,28 +4,23 @@ module CompanySite
   module ETI
     class Table
       class Products < self
-        # EXISTS = {
-        #   available: 'В наличии',
-        #   not_available: 'Нет в наличии',
-        #   order: 'Под заказ',
-        #   awaiting: 'Ожидается поступление',
-        #   none: 'Не указано'
-        # }.freeze
-
         # Кнопка добавления нового товара
         button(:add_new_product, css: '.new-row-product')
+
+        # Плейсхолдер у названия нового пустого товара
+        span(:empty_product_name, xpath: "//*[text()[contains(., 'Указать название')]]")
 
         # Ячейки товара
         elements(:products, :row, css: '*[id^="product-item"]')
         elements(:names, :cell, css: '.js-eti-name')
         elements(:rubrics, :cell, css: '.js-eti-rubric')
         elements(:images, :cell, css: '*[id^="product-item"] *[class*="ibb"]')
-        elements(:images_counters, :div, css: '*[id^="product-item"] *[class="ip-count"]')
+        elements(:images_counters, :div, css: '*[id^="product-item"] *[class="saved-images-count"]')
         elements(:public_state_icon, :cell, css: '.js-eti-status')
         elements(:battery_level, :cell, css: '.js-battery-wrapper')
         elements(:battery_title, :cell, css: '.battery')
         elements(:rubric_link, :cell, css: '.js-rubric-preview-link')
-        elements(:exists_link, :cell, css: '.js-eti-exists [title="Указать наличие"]')
+        elements(:exists_link, :cell, css: '.js-eti-exists .dashed-span')
         elements(:announces, :cell, css: '.js-eti-announce')
         elements(:prices, :cell, css: '.js-eti-price [title="Изменить цену"]')
         elements(:wholesale_prices, :cell, css: '.js-eti-wholesaleprice [title="Указать оптовую цену"]')
@@ -39,6 +34,12 @@ module CompanySite
         # Кнопки в плашке, появляющейся при наведении на строку товара
         button(:delete_product_icon, css: '.js-delete-product')
         elements(:copy_product_icon, css: '.js-copy-product')
+
+        # Чекбокс у строки товара
+        checkbox(:product_checkbox, css: '.js-check-product')
+
+        # Массовое действие "Добавить к акции"
+        button(:add_products_to_deal, css: '.js-deals-config')
 
         # @return элемент строки товара и таблицы Selenium::WebDriver::Element
         #

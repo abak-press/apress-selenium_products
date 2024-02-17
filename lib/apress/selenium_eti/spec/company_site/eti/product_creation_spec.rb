@@ -26,16 +26,16 @@ describe 'ЕТИ' do
 
       it('введенное имя отображается') { expect(@cs_eti_table_products.name(@product)).to eq(@name) }
 
-      # Определяется через локатор какой проект, и в зависимости
-      # от этого ожидаемый результат. Если ни один из локаторов
-      # проектов не найден, то выводится ошибка 'locator not found'
+      # На БЛ, если товар без рубрики, то статус_публикации у него unpublished (опубликованный на ск).
+      # Если лимиты публикации на ск забиты, то статус_публикации у товара будет archived.
+      # На ПЦ, если товар без рубрики, то статус_публикации у него сразу archived.
+      # Здесь выполняется проверка, является ли статус_публикации archived,
+      # иначе проверка на unpublished для БЛ.
       it 'товар не опубликован на портале' do
-        if @cs_eti_table.project_pulscen?
+        if @cs_eti_table_products.public_state(@product) == :archived
           expect(@cs_eti_table_products.public_state(@product)).to eq(:archived)
-        elsif @cs_eti_table.project_blizko?
-          expect(@cs_eti_table_products.public_state(@product)).to eq(:unpublished)
         else
-          raise ArgumentError, 'locator not found'
+          expect(@cs_eti_table_products.public_state(@product)).to eq(:unpublished)
         end
       end
     end

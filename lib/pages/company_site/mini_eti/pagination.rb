@@ -8,9 +8,8 @@ module CompanySite
       div(:current_page, css: '.js-eti-pagination-root .b-pagination_listItemCurrent')
       button(:previous_page_link, css: '.js-eti-pagination-root .b-pagination_headItemPrevious')
       button(:next_page_link, css: '.js-eti-pagination-root .b-pagination_headItemNext')
-      elements(:per_page_value, css: '.js-choose-amount-combobox a')
-      div(:current_per_page, css: '.ptrfap-choose-amount-wrapper .custom-combobox-input')
-      button(:per_page_button, css: '.ptrfap-choose-amount-wrapper .custom-combobox-toggle')
+      elements(:per_page_value, css: '.js-eti-filter-options-per_page')
+      button(:per_page_button, css: '.ptrfap-choose-amount-wrapper .js-eti-filter-per_page')
 
       def next_page
         wait_until_table_update { next_page_link }
