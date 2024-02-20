@@ -1,6 +1,10 @@
+# v0.6.16
+
+* 2024-02-20 [4fd06f8](../../commit/4fd06f8) - __(KirillGaliulin)__ Release 0.6.16 
+* 2024-02-17 [f7e70a4](../../commit/f7e70a4) - __(KirillGaliulin)__ fix(selenium): fix eti specs and minieti_spec; add deals popup 
+
 # v0.6.15
 
-* 2024-01-12 [a41b9ef](../../commit/a41b9ef) - __(KirillGaliulin)__ Release 0.6.15 
 * 2023-12-26 [9ad2c9a](../../commit/9ad2c9a) - __(KirillGaliulin)__ feature: refactoring commit 1 fix specs: product_creation_spec.rb and product_groups_spec.rb 
 
 # v0.6.14
