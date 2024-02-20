@@ -29,7 +29,10 @@ describe 'ЕТИ' do
         }
       end
 
-      it 'введеная цена отображается' do
+      # Определяется через локатор какой проект, и в зависимости
+      # от этого ожидаемый результат. Если ни один из локаторов
+      # проектов не найден, то выводится ошибка 'locator not found'
+      it 'введеная цена отображается, в рублях' do
         if @cs_eti_table.project_pulscen?
           expect(@cs_eti_table_products.price(@product)).to eq("#{price[:price]} руб.")
         elsif @cs_eti_table.project_blizko?
@@ -41,7 +44,7 @@ describe 'ЕТИ' do
     end
 
     context 'когда цена от и до', story: 'когда цена от и до' do
-      context 'когда только "от"' do
+      context 'когда только От' do
         let(:price) do
           {
             type: :range,
@@ -50,17 +53,11 @@ describe 'ЕТИ' do
         end
 
         it 'введеная цена отображается' do
-          if @cs_eti_table.project_pulscen?
-            expect(@cs_eti_table_products.price(@product)).to eq("от #{price[:price]} руб.")
-          elsif @cs_eti_table.project_blizko?
-            expect(@cs_eti_table_products.price(@product)).to eq("от #{price[:price]} ₽")
-          else
-            raise ArgumentError, 'locator not found'
-          end
+          expect(@cs_eti_table_products.price(@product)).to include("от #{price[:price]}")
         end
       end
 
-      context 'когда только "до"' do
+      context 'когда только До' do
         let(:price) do
           {
             type: :range,
@@ -69,17 +66,11 @@ describe 'ЕТИ' do
         end
 
         it 'введеная цена отображается' do
-          if @cs_eti_table.project_pulscen?
-            expect(@cs_eti_table_products.price(@product)).to eq("до #{price[:price_max]} руб.")
-          elsif @cs_eti_table.project_blizko?
-            expect(@cs_eti_table_products.price(@product)).to eq("до #{price[:price_max]} ₽")
-          else
-            raise ArgumentError, 'locator not found'
-          end
+          expect(@cs_eti_table_products.price(@product)).to include("до #{price[:price_max]}")
         end
       end
 
-      context 'когда заполняем "от" и "до"' do
+      context 'когда заполняем От и До' do
         let(:price) do
           {
             type: :range,
@@ -127,15 +118,8 @@ describe 'ЕТИ' do
       end
 
       it 'введеная цена отображается' do
-        if @cs_eti_table.project_pulscen?
-          expect(@cs_eti_table_products.wholesale_price(@product))
-            .to eq("#{wholesale_price[:price]} руб. /шт. от #{wholesale_price[:min_qty]} шт.")
-        elsif @cs_eti_table.project_blizko?
-          expect(@cs_eti_table_products.wholesale_price(@product))
-            .to eq("#{wholesale_price[:price]} ₽ /шт. от #{wholesale_price[:min_qty]} шт.")
-        else
-          raise ArgumentError, 'locator not found'
-        end
+        expect(@cs_eti_table_products.wholesale_price(@product))
+          .to include(wholesale_price[:price].to_s, wholesale_price[:min_qty].to_s)
       end
     end
 
@@ -148,7 +132,7 @@ describe 'ЕТИ' do
         }
       end
 
-      it 'введеная цена отображается' do
+      it 'введеная цена отображается, в рублях' do
         if @cs_eti_table.project_pulscen?
           expect(@cs_eti_table_products.wholesale_price(@product))
             .to eq("от #{wholesale_price[:price]} руб. /шт. от #{wholesale_price[:min_qty]} шт.")

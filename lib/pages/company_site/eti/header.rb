@@ -5,9 +5,9 @@ module CompanySite
     class Header < Page
       include CompanySite::ETI
 
-      checkbox(:exact_search, css: '#exact_search')
+      checkbox(:exact_search, css: '#search-checkbox-exact')
       text_area(:search_string, xpath: "//*[@id='product-bindings-search']")
-      button(:search_button, css: '.js-search-submit')
+      button(:search_button, css: '.js-eti-search-submit')
       div(:search_type, css: '.selected-search-type')
       label(:full_search, css: 'label[data-name="По названию, кр. описанию, артикулу"]')
       label(:search_by_name, css: 'label[data-name="По названию"]')

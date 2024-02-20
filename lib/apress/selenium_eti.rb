@@ -13,7 +13,9 @@ require "#{gem_directory}/lib/pages/company_site/eti/table_status_bar"
 require "#{gem_directory}/lib/pages/company_site/eti/navigation_column"
 
 # Попапы
+require "#{gem_directory}/lib/pages/company_site/eti/popups/deals_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/description_popup"
+require "#{gem_directory}/lib/pages/company_site/eti/popups/exists_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/groups_binding_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/images_upload_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/price_popup"
@@ -21,7 +23,6 @@ require "#{gem_directory}/lib/pages/company_site/eti/popups/public_state_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/rubrics_binding_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/traits_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/wholesale_price_popup"
-require "#{gem_directory}/lib/pages/company_site/eti/popups/exists_popup"
 
 # Мини-ЕТИ.
 require "#{gem_directory}/lib/pages/company_site/mini_eti/mini_eti"
