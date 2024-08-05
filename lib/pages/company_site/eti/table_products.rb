@@ -38,8 +38,8 @@ module CompanySite
         # Чекбокс у строки товара
         checkbox(:product_checkbox, css: '.js-check-product')
 
-        # Массовое действие "Добавить к акции"
-        button(:add_products_to_deal, css: '.js-deals-config')
+        # Строка, когда в таблице нет ни одного товара
+        span(:string_no_products, css: '.table-info__message')
 
         # @return элемент строки товара и таблицы Selenium::WebDriver::Element
         #

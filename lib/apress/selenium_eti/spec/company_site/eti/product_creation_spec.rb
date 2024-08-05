@@ -80,6 +80,7 @@ describe 'ЕТИ' do
 
         @product = @cs_eti_table_products.add_product(@fields)
         @cs_eti_table_products.copy_product(@product)
+        sleep 5
         @cs_eti_header.search_product(@fields[:name], exact: true)
       end
 

@@ -208,6 +208,8 @@ describe 'Мини-ЕТИ' do
         price: {
           type: :exact,
           price: Faker::Number.number(digits: 5),
+          currency: 'usd',
+          measure: 'бухта'
         },
       }
       @product = @cs_eti_table_products.add_product(@fields)
