@@ -16,20 +16,22 @@ module CompanySite
         exact_search if params[:exact] == true
         self.search_type = params[:search_type]
         self.search_string = name
-
-        # Помимо создания товара, текущий метод используется в копировании/удалении товара
-        # А значит в этих действиях не сработает проверка для цикла, который используется ниже
-        sleep 3
         search_button
         wait_render_table
 
         # Костыль для достоверности после sleep 3, который выполняет поиск до тех пор, пока не появится товар
         # Событие создания товара может не успеть записаться в эластик => товар не выведется после первого поиска
         table_products = CompanySite::ETI::Table::Products.new
-        while table_products.string_no_products? do
+        max_attempts = 10
+
+        max_attempts.times do
+          break unless table_products.string_no_products?
+
           search_button
           wait_render_table
         end
+
+        raise "Exceeded maximum attempts to find products" if table_products.string_no_products?
       end
 
       def search_type=(type)
