@@ -1,6 +1,11 @@
+# v0.6.17
+
+* 2024-08-06 [c6233c9](../../commit/c6233c9) - __(KirillGaliulin)__ Release 0.6.17 
+* 2024-08-05 [f139031](../../commit/f139031) - __(KirillGaliulin)__ fix(selenium): fix specs: eti, mini-eti, method search 
+* 2024-03-19 [4ec971f](../../commit/4ec971f) - __(KirillGaliulin)__ fix(README.md): update README 
+
 # v0.6.16
 
-* 2024-02-20 [4fd06f8](../../commit/4fd06f8) - __(KirillGaliulin)__ Release 0.6.16 
 * 2024-02-17 [f7e70a4](../../commit/f7e70a4) - __(KirillGaliulin)__ fix(selenium): fix eti specs and minieti_spec; add deals popup 
 
 # v0.6.15
