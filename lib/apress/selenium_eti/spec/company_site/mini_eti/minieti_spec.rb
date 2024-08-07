@@ -201,6 +201,9 @@ describe 'Мини-ЕТИ' do
     end
   end
 
+  # Добавил пары ключ-значение для валюты и единиц измерения (ЕИ), т.к. на БЛ
+  # товар создается сначала с валютой "руб.", а копируется другой новый товар с "₽".
+  # Заодно проверка функционала для выбора валют и ЕИ
   describe 'Копирование товара' do
     before do
       @fields = {
@@ -208,6 +211,8 @@ describe 'Мини-ЕТИ' do
         price: {
           type: :exact,
           price: Faker::Number.number(digits: 5),
+          currency: 'usd',
+          measure: 'бухта'
         },
       }
       @product = @cs_eti_table_products.add_product(@fields)
