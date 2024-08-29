@@ -2,6 +2,6 @@
 
 module Apress
   module SeleniumProducts
-    VERSION = '0.6.17'.freeze
+    VERSION = '1.0.0'.freeze
   end
 end
