@@ -1,16 +1,16 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'apress/selenium_eti/version'
+require 'apress/selenium_products/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'apress-selenium_eti'
-  spec.version       = Apress::SeleniumEti::VERSION
+  spec.name          = 'apress-selenium_products'
+  spec.version       = Apress::SeleniumProducts::VERSION
   spec.authors       = ['Fyodor Parmanchukov']
   spec.email         = ['rezerbit@gmail.ru']
 
-  spec.summary       = 'Selenium eti gem'
-  spec.description   = 'Cross-project eti and mini-eti autotests'
-  spec.homepage      = 'https://github.com/abak-press/apress-selenium_eti'
+  spec.summary       = 'Selenium products gem'
+  spec.description   = 'Cross-project products autotests'
+  spec.homepage      = 'https://github.com/abak-press/apress-selenium_products'
 
   spec.files       	 = `git ls-files -z`.split("\x0")
   spec.require_paths = ['lib']

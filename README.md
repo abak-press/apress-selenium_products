@@ -1,26 +1,26 @@
 Межпроектные автотесты с товарами: ЕТИ, мини-ЕТИ
 =====================
 
-Представляет собой гем apress-selenium_eti, который подключается в проекты Pulscen и Blizko. 
+Представляет собой гем apress-selenium_products, который подключается в проекты Pulscen и Blizko.
 Код тестов пишется в этом геме, а на проектах эти тесты запускаются.
 
 ! Автотесты из этого гема запускаются в проектах !
 
 ## Настройка гема и проектов
 - Установить ruby 2.4.10, bunlder 1.17.3. Для linux желательно использовать менеджер версий rvm.
-- Форкнуть репозиторий apress-selenium_eti на github.
+- Форкнуть репозиторий apress-selenium_products на github.
 - Форкнуть репозиторий проекта Pulscen на github (если еще не сделано) https://github.com/abak-press/pulscen
 - Форкнуть репозиторий проекта Blizko на github (если еще не сделано) https://github.com/abak-press/blizko
 - Склонировать на локальную машину форкнутые репозитории:
 ```
-git clone git@github.com:{login_на_github}/apress-selenium_eti.git
+git clone git@github.com:{login_на_github}/apress-selenium_products.git
 git clone git@github.com:{login_на_github}/pulscen.git
 git clone git@github.com:{login_на_github}/blizko.git
 ```
 
 - добавить ссылку на upstream репозиторий:
 ```
-git remote add upstream git@github.com:abak-press/apress-selenium_eti
+git remote add upstream git@github.com:abak-press/apress-selenium_products
 git remote add upstream git@github.com:abak-press/pulscen
 git remote add upstream git@github.com:abak-press/blizko
 ```
@@ -32,7 +32,7 @@ git remote -v
 - Переименовать файл `run_example.yml` в `run.yml`. Выставить в нем опции запуска тестов.
 
 ## Запуск тестов
-1. Подтянуть свежую версию гема apress-selenium_eti.
+1. Подтянуть свежую версию гема apress-selenium_products.
 ```
 git checkout master
 git pull upstream master
@@ -56,7 +56,7 @@ git checkout –b <имя_ветки>
 
 5. В файле Gemfile проекта указать локальный путь до гема.
 ```
-gem 'apress-selenium_eti', path: '/home/galiulin/autotests/apress-selenium_eti'
+gem 'apress-selenium_products', path: '/home/galiulin/autotests/apress-selenium_products'
 ```
 где /home/galiulin/autotests - локальный путь
 

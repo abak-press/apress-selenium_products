@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Упорядоченный рекваир. Небходимо сначала подключать неймспейсы, иначе будут ошибки при инициализации.
-gem_directory = Gem::Specification.find_by_name("apress-selenium_eti").gem_dir
+gem_directory = Gem::Specification.find_by_name("apress-selenium_products").gem_dir
 
 # ЕТИ
 require "#{gem_directory}/lib/pages/company_site/eti/eti"
