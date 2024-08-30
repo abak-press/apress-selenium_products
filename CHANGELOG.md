@@ -1,6 +1,10 @@
+# v1.0.0
+
+* 2024-08-29 [7917cba](../../commit/7917cba) - __(KirillGaliulin)__ Release 1.0.0 
+* 2024-08-29 [448b570](../../commit/448b570) - __(KirillGaliulin)__ chore: rename gem 
+
 # v0.6.17
 
-* 2024-08-06 [c6233c9](../../commit/c6233c9) - __(KirillGaliulin)__ Release 0.6.17 
 * 2024-08-05 [f139031](../../commit/f139031) - __(KirillGaliulin)__ fix(selenium): fix specs: eti, mini-eti, method search 
 * 2024-03-19 [4ec971f](../../commit/4ec971f) - __(KirillGaliulin)__ fix(README.md): update README 
 
