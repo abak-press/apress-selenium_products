@@ -1,6 +1,12 @@
+# v1.0.2
+
+* 2024-08-30 [a7b87f8](../../commit/a7b87f8) - __(KirillGaliulin)__ Release 1.0.2 
+* 2024-08-01 [6826a8e](../../commit/6826a8e) - __(KirillGaliulin)__ feature: add new_form_creation_spec and creation_page 
+* 2024-09-05 [2059b57](../../commit/2059b57) - __(Fort-Nox)__ Release 1.0.1 
+* 2024-09-05 [d604032](../../commit/d604032) - __(Fort-Nox)__ fix(selenium): fix mini-eti spec: images_upload_popup 
+
 # v1.0.0
 
-* 2024-08-29 [7917cba](../../commit/7917cba) - __(KirillGaliulin)__ Release 1.0.0 
 * 2024-08-29 [448b570](../../commit/448b570) - __(KirillGaliulin)__ chore: rename gem 
 
 # v0.6.17
