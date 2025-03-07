@@ -258,6 +258,7 @@ module CompanySite
         .perform
 
       Page.elements(:available_trait_values, :link, css: '.select-options > div')
+      wait_until { available_trait_values_elements.any? }
       available_trait_values_elements.find { |trait_value| trait_value.text == value }.click
     end
 
