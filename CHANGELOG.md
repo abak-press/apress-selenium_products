@@ -1,6 +1,11 @@
+# v1.0.4
+
+* 2025-03-07 [6cfaa3f](../../commit/6cfaa3f) - __(Fort-Nox)__ Release 1.0.4 
+* 2025-03-07 [a7e89bd](../../commit/a7e89bd) - __(Fort-Nox)__ Release 1.0.4 
+* 2025-03-07 [8c41b65](../../commit/8c41b65) - __(Fort-Nox)__ fix(selenium): add wait for portal traits values [skip ci] 
+
 # v1.0.3
 
-* 2024-10-15 [6223929](../../commit/6223929) - __(ovsyanik-ka)__ Release 1.0.3 
 * 2024-10-11 [9a91593](../../commit/9a91593) - __(ovsyanik-ka)__ fix: change some methods https://jira.railsc.ru/browse/AT-642 
 
 # v1.0.2
