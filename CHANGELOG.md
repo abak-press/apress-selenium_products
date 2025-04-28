@@ -1,7 +1,10 @@
+# v1.1.0
+
+* 2025-04-28 [153bf18](../../commit/153bf18) - __(Fort-Nox)__ Release 1.1.0 
+* 2025-04-25 [5d72ec3](../../commit/5d72ec3) - __(Fort-Nox)__ feat(selenium): add kirby import yml spec from the blizko 
+
 # v1.0.4
 
-* 2025-03-07 [6cfaa3f](../../commit/6cfaa3f) - __(Fort-Nox)__ Release 1.0.4 
-* 2025-03-07 [a7e89bd](../../commit/a7e89bd) - __(Fort-Nox)__ Release 1.0.4 
 * 2025-03-07 [8c41b65](../../commit/8c41b65) - __(Fort-Nox)__ fix(selenium): add wait for portal traits values [skip ci] 
 
 # v1.0.3
