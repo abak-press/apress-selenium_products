@@ -12,6 +12,7 @@ module CompanySite
 
         # Ячейки товара
         elements(:products, :row, css: '*[id^="product-item"]')
+        elements(:service_labels, :cell, css: '.js-show-service-label-popup')
         elements(:names, :cell, css: '.js-eti-name')
         elements(:rubrics, :cell, css: '.js-eti-rubric')
         elements(:images, :cell, css: '*[id^="product-item"] *[class*="ibb"]')
@@ -100,6 +101,20 @@ module CompanySite
           confirm(true) { delete_product_icon }
 
           wait_saving
+        end
+
+        def set_service_labels(product, service_labels)
+          click_on_cell(service_labels_elements[product_index(product)])
+
+          service_labels_popup = ServiceLabelsPopup.new
+          service_labels_popup.wait_for_visible
+          service_labels_popup.select_service_labels(service_labels)
+
+          wait_saving
+        end
+
+        def service_labels(product)
+          service_labels_elements[product_index(product)].element.text.strip
         end
 
         # @return nothing
