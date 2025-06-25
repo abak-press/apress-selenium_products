@@ -1,6 +1,10 @@
+# v1.2.0
+
+* 2025-06-24 [521b873](../../commit/521b873) - __(Fort-Nox)__ Release 1.2.0 
+* 2025-06-23 [f8a961f](../../commit/f8a961f) - __(Fort-Nox)__ feat(selenium): add check for service labels, fix product copy test 
+
 # v1.1.0
 
-* 2025-04-28 [153bf18](../../commit/153bf18) - __(Fort-Nox)__ Release 1.1.0 
 * 2025-04-25 [5d72ec3](../../commit/5d72ec3) - __(Fort-Nox)__ feat(selenium): add kirby import yml spec from the blizko 
 
 # v1.0.4
