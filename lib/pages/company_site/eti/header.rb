@@ -20,24 +20,25 @@ module CompanySite
         search_button
         wait_render_table
 
+        expected_count = options[:expected_count] || 1
         table_products = CompanySite::ETI::Table::Products.new
         max_attempts = 10
 
-        case options [:operation]
-        when :copy
-          max_attempts.times do
-            break if table_products.products_elements.size >= 2
+        max_attempts.times do
+          search_button
+          wait_render_table
 
-            search_button
-            wait_render_table
-            # Для синхронизации в среднем требуется около 1 минуты,
-            # чтобы товар после создания появился в индексе эластика
-            # Для достоверности увеличили слип до 10 секунд после каждой попытки повторного поиска,
-            # чтобы скопированный товар точно появился в ЕТИ
-            sleep 10
-          end
-          raise "Товары не отобразились после #{max_attempts} повторных поисков" if
-            table_products.string_no_products? || table_products.products_elements.size < 2
+          break if table_products.products_elements.size >= expected_count
+
+          # Для синхронизации в среднем требуется около 1 минуты,
+          # чтобы товар после создания появился в индексе эластика
+          # Для достоверности увеличили слип до 10 секунд после каждой попытки повторного поиска,
+          # чтобы скопированный товар точно появился в ЕТИ
+          sleep 10
+        end
+
+        if table_products.string_no_products? || table_products.products_elements.size < expected_count
+          raise "Товары не отобразились после #{max_attempts} повторных поисков"
         end
       end
 
