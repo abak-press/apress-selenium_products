@@ -82,7 +82,7 @@ describe 'ЕТИ' do
 
         @product = @cs_eti_table_products.add_product(@fields)
         @cs_eti_table_products.copy_product(@product)
-        @cs_eti_header.search_product(@fields[:name], exact: true, operation: :copy)
+        @cs_eti_header.search_product(@fields[:name], exact: true, expected_count: 2)
       end
 
       it 'отобразится 2 идентичных товара' do
