@@ -1,6 +1,10 @@
+# v1.2.1
+
+* 2025-06-30 [d115f03](../../commit/d115f03) - __(Fort-Nox)__ Release 1.2.1 
+* 2025-06-26 [25fa2ac](../../commit/25fa2ac) - __(Fort-Nox)__ fix(selenium): fix search_product method when searching for one product 
+
 # v1.2.0
 
-* 2025-06-24 [521b873](../../commit/521b873) - __(Fort-Nox)__ Release 1.2.0 
 * 2025-06-23 [f8a961f](../../commit/f8a961f) - __(Fort-Nox)__ feat(selenium): add check for service labels, fix product copy test 
 
 # v1.1.0
