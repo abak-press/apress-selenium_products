@@ -1,6 +1,10 @@
+# v1.2.2
+
+* 2025-07-01 [231f852](../../commit/231f852) - __(SamsonovaDana)__ Release 1.2.2 
+* 2025-07-01 [006c35b](../../commit/006c35b) - __(SamsonovaDana)__ feat(selenium): add tigr_spec from blizko 
+
 # v1.2.1
 
-* 2025-06-30 [d115f03](../../commit/d115f03) - __(Fort-Nox)__ Release 1.2.1 
 * 2025-06-26 [25fa2ac](../../commit/25fa2ac) - __(Fort-Nox)__ fix(selenium): fix search_product method when searching for one product 
 
 # v1.2.0
