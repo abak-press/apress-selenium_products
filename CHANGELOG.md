@@ -1,6 +1,10 @@
+# v1.2.3
+
+* 2025-08-26 [f253db3](../../commit/f253db3) - __(MrnDeg)__ Release 1.2.3 
+* 2025-08-26 [588141d](../../commit/588141d) - __(MrnDeg)__ feat(selenium) products labels in pct and company site 
+
 # v1.2.2
 
-* 2025-07-01 [231f852](../../commit/231f852) - __(SamsonovaDana)__ Release 1.2.2 
 * 2025-07-01 [006c35b](../../commit/006c35b) - __(SamsonovaDana)__ feat(selenium): add tigr_spec from blizko 
 
 # v1.2.1
