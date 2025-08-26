@@ -80,6 +80,11 @@ module CompanySite
     text_area(:description_of_photo, css: '.image-block__textarea .aui-admin-textarea__field')
     div(:image_error, css: 'div.image-loader__error-text')
 
+    # Блок меток на товар
+    checkbox(:free_delivery, css: '#marketing-labels-0')
+    checkbox(:credit, css: '#marketing-labels-4')
+    checkbox(:product_sertificate, css: '#marketing-labels-9')
+
     # Блок Группа товаров
     elements(:groups_tree, css: '.groups__selector-block .aui-admin-rubric-select__title')
 
