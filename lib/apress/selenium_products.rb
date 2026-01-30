@@ -24,6 +24,7 @@ require "#{gem_directory}/lib/pages/company_site/eti/popups/rubrics_binding_popu
 require "#{gem_directory}/lib/pages/company_site/eti/popups/traits_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/wholesale_price_popup"
 require "#{gem_directory}/lib/pages/company_site/eti/popups/service_labels_popup"
+require "#{gem_directory}/lib/pages/company_site/eti/popups/setting_columns_popup.rb"
 
 # Мини-ЕТИ
 require "#{gem_directory}/lib/pages/company_site/mini_eti/mini_eti"
