@@ -13,6 +13,18 @@ module CompanySite
       label(:full_search, css: 'label[data-name="По названию, кр. описанию, артикулу"]')
       label(:search_by_name, css: 'label[data-name="По названию"]')
 
+      button(:setting_columns_button, css: '.js-toggle-settings')
+
+      def setting_columns
+        setting_columns_button
+
+        setting_columns_popup = CompanySite::ETI::Table::SettingColumnsPopup.new
+        setting_columns_popup.wait_for_visible
+        setting_columns_popup.select_all_columns
+
+        wait_render_table
+      end
+
       def search_product(name, options = {})
         exact_search if options[:exact] == true
         self.search_type = options[:search_type] if options[:search_type]

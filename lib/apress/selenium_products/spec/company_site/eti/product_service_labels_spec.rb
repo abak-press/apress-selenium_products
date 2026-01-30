@@ -17,6 +17,7 @@ describe 'ЕТИ' do
 
   describe 'Служебная метка' do
     before(:all) do
+      @cs_eti_header.setting_columns
       @name = Faker::Number.leading_zero_number(digits: 5).to_s
       @cs_eti_table_products.add_product(name: @name)
       @product = @cs_eti_table_products.product(name: @name)
@@ -24,7 +25,7 @@ describe 'ЕТИ' do
 
     context 'когда добавляем служебную метку' do
       before do
-        @service_labels = 'Премиум-блок'
+        @service_labels = 'short_desc'
         @cs_eti_table_products.set_service_labels(@product, @service_labels)
         @cs_eti_header.search_product(@name, exact: true)
         @product = @cs_eti_table_products.product(name: @name)
@@ -37,9 +38,8 @@ describe 'ЕТИ' do
 
     context 'когда изменяем служебную метку' do
       before do
-        @cs_eti_header.search_product(@name, exact: true)
         @product = @cs_eti_table_products.product(name: @name)
-        @service_labels = 'new_unic'
+        @service_labels = 'long_desc'
         @cs_eti_table_products.set_service_labels(@product, @service_labels)
         @cs_eti_header.search_product(@name, exact: true)
         @product = @cs_eti_table_products.product(name: @name)
@@ -52,7 +52,6 @@ describe 'ЕТИ' do
 
     context 'когда удаляем служебную метку' do
       before do
-        @cs_eti_header.search_product(@name, exact: true)
         @product = @cs_eti_table_products.product(name: @name)
         @service_labels = ''
         @cs_eti_table_products.set_service_labels(@product, @service_labels)

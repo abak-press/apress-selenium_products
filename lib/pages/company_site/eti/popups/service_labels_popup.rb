@@ -16,11 +16,12 @@ module CompanySite
 
         def select_service_labels(service_label)
           service_labels_elements.each do |element|
-            label_text = element.text
             checkbox = element.checkbox_element(css: 'input[type="checkbox"]')
+            checkbox_value = checkbox.attribute('value')
 
-            if label_text == service_label
+            if checkbox_value == service_label
               checkbox.click unless checkbox.checked?
+              break
             elsif checkbox.checked?
               checkbox.click
             end
