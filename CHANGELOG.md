@@ -1,6 +1,10 @@
+# v1.2.4
+
+* 2026-01-30 [3742a43](../../commit/3742a43) - __(Fort-Nox)__ Release 1.2.4 
+* 2026-01-30 [1f19f60](../../commit/1f19f60) - __(Fort-Nox)__ fix(selenium): fix service_lables_spec and add setting columns method 
+
 # v1.2.3
 
-* 2025-08-26 [f253db3](../../commit/f253db3) - __(MrnDeg)__ Release 1.2.3 
 * 2025-08-26 [588141d](../../commit/588141d) - __(MrnDeg)__ feat(selenium) products labels in pct and company site 
 
 # v1.2.2
