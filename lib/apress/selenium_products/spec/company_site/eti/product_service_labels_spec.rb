@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'ЕТИ' do
+describe 'testЕТИ' do
   before(:all) do
     @cs_eti_table          = CompanySite::ETI::Table.new
     @cs_eti_table_products = CompanySite::ETI::Table::Products.new
